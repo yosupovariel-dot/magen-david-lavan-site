@@ -1,0 +1,43 @@
+<!--
+{
+  "title": "הסיירות שלנו - סיירות התנדבות ברחבי הארץ",
+  "crumb": "הסיירות שלנו",
+  "description": "רשימת סיירות ההתנדבות של מגן דוד לבן במחוז צפון, מרכז, יהודה ושומרון ודרום - מנהלי סיירות, מוקדים וקישורי הצטרפות לקבוצות ה-WhatsApp.",
+  "priority": "0.9"
+}
+-->
+<section class="phero phero--mint phero--slim" aria-labelledby="ph-title">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="פירורי לחם"><ol><li><a href="index.html">ראשי</a></li><li aria-current="page">הסיירות שלנו</li></ol></nav>
+    <p class="eyebrow"><span class="eyebrow__num">{{total_patrols}}</span> סיירות · {{total_districts}} מחוזות</p>
+    <h1 id="ph-title" class="h1">הסיירות שלנו.</h1>
+    <p class="lead">החלום של כולם מתגשם - אפשר להתנדב בסיירות ה-WhatsApp הפרוסות ברחבי הארץ. מצאו את הסיירת שבאזורכם והצטרפו.</p>
+    <div class="finder">
+      <nav class="finder__tabs" aria-label="מעבר למחוז">
+        <a href="#north">צפון</a><a href="#center">מרכז</a><a href="#judea-samaria">יהודה ושומרון</a><a href="#south">דרום</a>
+      </nav>
+      <div class="finder__search">
+        <label for="city-search">חיפוש סיירת לפי עיר או יישוב</label>
+        <input id="city-search" type="search" inputmode="search" autocomplete="off" placeholder="לדוגמה: חיפה" aria-describedby="city-search-status">
+        <p id="city-search-status" class="finder__status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap districts">
+{{patrols_full}}
+</div>
+
+<section class="section section--tint" aria-labelledby="more-title">
+  <div class="wrap split">
+    <div>
+      <h2 id="more-title" class="h2">לא מצאתם סיירת באזורכם?</h2>
+      <p class="lead">פנו למוקד ההתנדבות הארצי, או התנדבו בתחום ההתמחות שלכם.</p>
+    </div>
+    <div class="btnrow">
+      <a class="btn btn--primary btn--lg" href="tel:{{volunteer_line.tel}}">{{icon:phone}} {{volunteer_line.label}}</a>
+      <a class="btn btn--ghost btn--lg" href="services.html#volunteer">להתנדבות בתחומך</a>
+    </div>
+  </div>
+</section>

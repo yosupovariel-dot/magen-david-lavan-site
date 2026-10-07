@@ -1,0 +1,141 @@
+{
+  "site": {
+    "name": "מגן דוד לבן",
+    "name_en": "Magen David Lavan",
+    "slogan": "הצלה מעבר לרפואה",
+    "url": "https://www.magendavidlavan.com",
+    "email": "maagendavidlavan@gmail.com",
+    "address": "אבן שמואל, ישראל",
+    "volunteer_line": { "label": "מוקד התנדבות ארצי", "display": "050-4126-351", "tel": "+972504126351" },
+    "emergency_line": { "label": "מוקד חירום ארצי", "display": "053-7994-199", "tel": "+972537994199" },
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=61553693558027",
+      "youtube": "https://www.youtube.com/channel/UCTONx1UmEGpipkcWXj9Cz1Q",
+      "instagram": "https://www.instagram.com/invites/contact/?i=10jhyj2de4m3o&utm_content=tg1hv2x",
+      "status": "https://wa.me/972504552025",
+      "gallery": "https://photos.google.com/share/AF1QipPSJKAMsTl7sIqlQL2NetR6oe8NOYeQ6pbgJYP3Yi2Jy3bnaKgKtrIScnRgm3jViw/photo/AF1QipOFMo7EfXioeAB9ItJEJeRZumwDUM3E7zT3mjlW?key=OUpSaUxQU29oVTZmUTVLbU03aEtiekEwOXlkY0Z3"
+    },
+    "donate": {
+      "paybox": "https://payboxapp.page.link/h2UYKxHXzxFGvE648",
+      "bit": "https://www.bitpay.co.il/app/me/20FE7E13-B09F-13C7-A703-C8230A8C88D2D474"
+    },
+    "forms": {
+      "volunteer": "https://forms.gle/KixKasDQdBXEitRj9",
+      "gemach": "https://forms.gle/KixKasDQdBXEitRj9",
+      "assistance": "https://forms.gle/YgsfcU2v9Gx6Nigt7"
+    },
+    "stats": [
+      { "value": 2500, "label": "מתנדבים" },
+      { "value": 93700, "label": "אנשים שעזרנו להם" },
+      { "value": 28, "label": "חברות שפנו אלינו" }
+    ],
+    "main_video": "YdVy9GLwWO4"
+  },
+  "districts": [
+    {
+      "id": "north",
+      "name": "מחוז צפון",
+      "tone": "mint",
+      "commander": "יהונתן זרקון",
+      "commander_role": "מפקד מחוז צפון ומנהל המערך",
+      "commander_note": "אחראי רישום עמותה, בירוקרטיות, תקציבים ולוגיסטיקה.",
+      "hotline": "050-4552-025",
+      "group": "https://chat.whatsapp.com/JQwLIwmySrq5lMlowsvAVr",
+      "image": "galilee",
+      "areas": "צפת, עפולה, נתניה, רעננה וחיפה",
+      "patrols": [
+        { "city": "רעננה", "manager": "דביר מורדיאן", "phone": "054-773-0433", "group": "https://chat.whatsapp.com/E4malDm0zF2EL0fCqrv7Fi" },
+        { "city": "חיפה", "manager": "יצחק בן מיכאל", "phone": "055-280-4032", "group": "https://chat.whatsapp.com/KhcnIWirT9EGubLMZSgjV9" },
+        { "city": "נתניה", "manager": "נעם כהן", "phone": "058-428-8830", "group": "https://chat.whatsapp.com/HmOtqZn0VkGEqopZI2es8b" },
+        { "city": "צפת", "manager": "קובי", "phone": "050-867-3664", "group": "https://chat.whatsapp.com/LbxhRBiBAuL18SQBv3P1I7" },
+        { "city": "עפולה", "manager": "משה דאקס", "phone": "052-235-2668", "group": "https://chat.whatsapp.com/CceQQXjfWV53ddpS6cpf4Q" }
+      ]
+    },
+    {
+      "id": "center",
+      "name": "מחוז מרכז",
+      "tone": "sky",
+      "commander": "דביר מורדיאן",
+      "commander_role": "מפקד מחוז מרכז",
+      "commander_note": "",
+      "hotline": "054-7730-433",
+      "group": "https://chat.whatsapp.com/DBodmjpVvLo9tlhzMxNspe",
+      "image": "tel-aviv",
+      "areas": "ירושלים, תל אביב, בת ים, פתח תקווה, רמת השרון, ראשון לציון, מודיעין, הרצליה, גני תקווה ורחובות",
+      "patrols": [
+        { "city": "ירושלים", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/GA9KLM4eyRW88aDIuCN9vK" },
+        { "city": "תל אביב", "manager": "אופק", "phone": "054-2065-556", "group": "https://chat.whatsapp.com/LPnONvaNX8fALL25hlVF0n" },
+        { "city": "בת ים", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/FZhyCJ9K3FLL9CnrzfXjnJ" },
+        { "city": "פתח תקווה", "manager": "אליסף צדוק", "phone": "050-537-1008", "group": "https://chat.whatsapp.com/GJ1TnHjXddXJSPOlyuWFLF" },
+        { "city": "רמת השרון", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/GQHxpk4V66TIb4MqIEjzTj" },
+        { "city": "ראשון לציון", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/KibzG9NBjaDFrgf6JNmwkZ" },
+        { "city": "מודיעין", "manager": "ידידיה וקנין", "phone": "050-680-5538", "group": "https://chat.whatsapp.com/KibzG9NBjaDFrgf6JNmwkZ" },
+        { "city": "הרצליה", "manager": "אופק", "phone": "054-2065-556", "group": "https://chat.whatsapp.com/J9RB5mg7IczC09JqObhws4" },
+        { "city": "גני תקווה", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/LYFQfDxpsT79YVtb2OXtLM" },
+        { "city": "רחובות", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/CiTTI99plSqAWyJKO14c3w" }
+      ]
+    },
+    {
+      "id": "judea-samaria",
+      "name": "מחוז יהודה ושומרון",
+      "tone": "lilac",
+      "commander": "יגל דחבש",
+      "commander_role": "מפקד מחוז יהודה ושומרון",
+      "commander_note": "",
+      "hotline": "058-695-8567",
+      "group": "https://chat.whatsapp.com/KkNy9FSkvNxFc0a7bUrV8w",
+      "image": "olive-grove",
+      "areas": "כוכב השחר, קרית ארבע, הר ברכה, עלי, עפרה, עץ אפרים, שערי תקווה ותלם",
+      "patrols": [
+        { "city": "קריית ארבע", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/HEKHFdYMhOU0OAEWYQ0Te8" },
+        { "city": "תלם", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/Baw7mJi67AtLSclzc2kcu4" },
+        { "city": "הר ברכה", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/LeTOJxO3tNRES4c5pj0qDq" },
+        { "city": "כוכב השחר", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/Cp8f3QUiMp4HFub9fMCsi1" },
+        { "city": "עלי", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/FhqeaI4cobN55QTdsXkure" },
+        { "city": "עפרה", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/BEX0c9OdnO99UZtFEtYzy0" },
+        { "city": "שערי תקווה", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/EL0Wmn8Htnn2AFbHMlZYOT" }
+      ]
+    },
+    {
+      "id": "south",
+      "name": "מחוז דרום",
+      "tone": "aqua",
+      "commander": "אליאל גדג'",
+      "commander_role": "מפקד מחוז דרום",
+      "commander_note": "",
+      "hotline": "058-563-0059",
+      "group": "",
+      "image": "negev",
+      "areas": "אילת, אשדוד, אשקלון, באר שבע, בית שמש, נתיבות, קרית גת ושדרות",
+      "patrols": [
+        { "city": "אילת", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/JOvkwuMRVGWAigMBB1myv3" },
+        { "city": "אשדוד", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/LqrELGWau5a0zJ13uSpPkC" },
+        { "city": "אשקלון", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/GZ8s2Qw6hTvHJ0sd9LU9AI" },
+        { "city": "באר שבע", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/HwPNWYPt89t5RTvAZcnxzV" },
+        { "city": "בית שמש", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/CJksR2yOli3HFm6egtmXUV" },
+        { "city": "נתיבות", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/KfMcASfb7waIJjU47otrxy" },
+        { "city": "קריית גת", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/IBfrS0HUbe3LD3ptcRa5Vi" },
+        { "city": "שדרות", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/J0AxGm3Jv4RB7ujBAxz8YR" }
+      ]
+    }
+  ],
+  "testimonials": [
+    { "name": "הרב שלמה עמאר שליט\"א", "role": "הראשון לציון, הרב הראשי לישראל", "group": "rabbis", "quote": "מגן דוד לבן.. זה דבר גדול! זה חסד אמיתי!", "video": "4bydsT8usJk", "featured": true },
+    { "name": "בנימין נתניהו", "role": "ראש ממשלת ישראל", "group": "public", "quote": "אני מתרשם מהארגון שהקמתם ״מגן דוד לבן״! צריך לעזור לכם!", "video": "m3jSUNp4vgE", "featured": true },
+    { "name": "הגאון רבי יצחק בצרי שליט\"א", "role": "", "group": "rabbis", "quote": "אני קורא לכולם לבוא ולהתנדב במגן דוד לבן ומי שאינו יכול שיבוא ויקח חלק בתרומות למתנדבים", "video": "mLX24PscWdk", "featured": false },
+    { "name": "הרב דוד ג'יאמי", "role": "ישיבת הר המור", "group": "rabbis", "quote": "מגן דוד לבן זה הארגון שייתן לכם סיוע ומענה במה שאתם צריכים, אז בואו ותעזרו לארגון להתקיים ולגדול", "video": "3BdFx-avJP4", "featured": false },
+    { "name": "בצלאל סמוטריץ'", "role": "שר האוצר של ישראל", "group": "public", "quote": "מגן דוד לבן - ארגון ארצי של מתנדבים, סיירות חירום, לוקחים אחריות, מחברים הרבה מאוד גופים של מתנדבים!.. אני מאחל לכם בהצלחה ומזמין את כולם להתנדב, לתרום ולהיות חלק!", "video": "FE1yjHJXDb8", "featured": true },
+    { "name": "הרב דוב ליאור", "role": "פוסק הדור, הגאון", "group": "rabbis", "quote": "סיפרו לי על הארגון ״מגן דוד לבן״ שעיקרו להגות לכל הצעירים שאכפת להם להושיט עזרה, בייחוד בתקופה זו! ודאי מי שיעזור יהיה בזה מצווה גדולה!", "video": "T96JvWf_kXQ", "featured": false },
+    { "name": "שמחה רוטמן", "role": "יושב ראש ועדת חוקה ומשפט", "group": "public", "quote": "אנחנו גילינו במהלך המלחמה כמה חשוב דווקא המעטפת, לא רק העזרה הרפואית! מערך חשוב מאוד!", "video": "MzU21MQWjBM", "featured": false },
+    { "name": "אורית סטרוק", "role": "שרת ההתיישבות וחברת הכנסת", "group": "public", "quote": "ארגון שעושה פעילות חשובה ביותר! זה חשוב מאוד לבוא לתת כתף!", "video": "5O00Aofcl6o", "featured": false },
+    { "name": "הרב שלמה אבינר", "role": "נשיא ישיבת עטרת ירושלים ומשפיע בציונות הדתית", "group": "rabbis", "quote": "ישר כוחכם! למגן דוד לבן, לעשות חסד, חסד זה יסוד הכל! ה' יברך אתכם על עבודת הקודש!", "video": "53CdJ1DPnVQ", "featured": true },
+    { "name": "הרב ישראל אברג'ל", "role": "מקובל אלוקי, ממשיכיו של הגאון ר' יורם אברג'ל", "group": "rabbis", "quote": "אני רוצה לברך מעומק הלב את המתנדבים והמעוניינים להתנדב לארגון הנפלא של ״מגן דוד לבן״.. ומכח המצווה הגדולה של גמילות חסדים שינצלו מחבלי משיח! ואין דבר גדול מגמילות חסדים!.. וזה המפתח של כלל ישראל!", "video": "UbI76PWXLT0", "featured": false },
+    { "name": "הרב בן ציון אלגזי", "role": "ראש ישיבת רמת גן, ראש מכון צורבא מרבנן, הגאון", "group": "rabbis", "quote": "הקימו ארגון נפלא ביותר של חסד שנקרא ״מגן דוד לבן״, בין מי שיכול לעזור בממונו, בין מי שיכול לעזור בגופו, בין מי שיכול בכל צורה שהיא!", "video": "XWFt4DlClc8", "featured": false },
+    { "name": "הרב שניר גואטה", "role": "אחד מגדולי המחזירים בתשובה, רב בהידברות", "group": "rabbis", "quote": "אני רוצה לברך את ארגון מגן דוד לבן שעושים פעילות קדושה וענפה למען עם ישראל!", "video": "u9-UwTZjYLU", "featured": false },
+    { "name": "הרב אורי שרקי", "role": "רב תנועת הנוער עזרא", "group": "rabbis", "quote": "מגן דוד לבן נותן כוח לכוחות הביטחון! נותן כוח לעם ישראל! זה ארגון חשוב מאוד!", "video": "vCOSWGLuEsk", "featured": false },
+    { "name": "שלמה קרעי", "role": "שר התקשורת של ישראל", "group": "public", "quote": "מגן דוד לבן, עמותה שבאה לעשות חסד ולסייע.. קורא לכל מי שמכיר ושומע לבוא להתנדב ולקחת חלק!", "video": "02cEkQtjHZg", "featured": false },
+    { "name": "הגאון הרב שמואל אליהו", "role": "הרב הראשי לצפת וחבר מועצת הרבנות הראשית", "group": "rabbis", "quote": "ארגון מגן דוד לבן שלקח על עצמו לעשות חסד! להרבות אור, להרבות ברכה! יחוזקו כל מי שעוזר, כל מי שתומך!", "video": "BzToGeCUpak", "featured": true },
+    { "name": "הרב שלום ארוש", "role": "גדול רבני חסידות ברסלב", "group": "rabbis", "quote": "למייסד המערך: ה' יברך אותך שיהיה לך הצלחה גדולה וסייעתא דשמייה גדולה!", "video": "", "featured": false },
+    { "name": "הרב דוד לאו שליט\"א", "role": "הרב הראשי לישראל, נשיא בית הדין הרבני הגדול", "group": "rabbis", "quote": "לוחמים רבים נלחמים בחירוף נפש, בגבורה, באומץ.. ומוסרים חייהם למען זולתם!", "video": "Ob1yeTKewH0", "featured": true }
+  ]
+}

@@ -1,0 +1,185 @@
+<!--
+{
+  "title": "מגן דוד לבן | מערך ההתנדבות הארצי - הצלה מעבר לרפואה",
+  "description": "מגן דוד לבן - מערך התנדבות ארצי עם מעל 2,500 מתנדבי סיירות ב-4 מחוזות. צריכים עזרה או רוצים לעזור? הצטרפו לסיירת ההתנדבות באזורכם.",
+  "priority": "1.0",
+  "bodyclass": "home"
+}
+-->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="wrap hero__in">
+    <div class="hero__copy">
+      <p class="eyebrow eyebrow--chip"><span class="pulse" aria-hidden="true"></span> מערך ההתנדבות הארצי יוצא בקמפיין גיוס מתנדבים</p>
+      <h1 id="hero-title" class="hero__title">
+        <span class="hero__l1">הצלה</span>
+        <span class="hero__l2">מעבר <em>לרפואה.</em></span>
+      </h1>
+      <p class="hero__lead">״מגן דוד לבן״ - עמותה לחיבור בין מתנדבים לאנשים שצריכים עזרה. מתנדבי הסיירות שלנו פרוסים בכל חלקי הארץ ומגיעים בכל קריאה.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary btn--lg" href="patrols.html">להצטרפות לסיירת באזורך {{icon:arrow}}</a>
+        <a class="btn btn--ghost btn--lg" href="services.html#assist">צריכים עזרה?</a>
+      </div>
+      <ul class="hero__proof" role="list">
+        <li><b class="num">2,500+</b> מתנדבי סיירות</li>
+        <li><b>{{total_districts}}</b> מחוזות</li>
+        <li><b>{{total_patrols}}</b> סיירות אזוריות</li>
+      </ul>
+    </div>
+    <div class="hero__art">
+      <figure class="hero__main">
+        {{img:hero-volunteers|שני מתנדבים מעבירים ביניהם ארגז סיוע ליד רכב|hero__img|(max-width: 900px) 100vw, 46vw|eager}}
+      </figure>
+      <figure class="hero__round">
+        {{img:flag|דגל ישראל מתנופף על רקע שמיים כחולים|hero__img|220px|eager}}
+      </figure>
+      <div class="hero__card hero__card--sos">
+        <span class="hero__card-k"><span class="pulse" aria-hidden="true"></span> {{emergency_line.label}}</span>
+        <a href="tel:{{emergency_line.tel}}" dir="ltr">{{emergency_line.display}}</a>
+      </div>
+      <div class="hero__card hero__card--badge" aria-hidden="true">
+        <img src="assets/img/logo-160.webp" width="64" height="64" alt="">
+      </div>
+      <svg class="hero__hex" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 14 174 142H26zM100 186 26 58h148z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+    </div>
+  </div>
+</section>
+
+{{ticker}}
+
+<section class="section intro" aria-labelledby="intro-title">
+  <div class="wrap intro__grid">
+    <div class="intro__side">
+      <p class="eyebrow"><span class="eyebrow__num">01</span> המערך</p>
+      <h2 id="intro-title" class="h2">אזרחים טובים שרוצים לעשות <span class="u">יותר.</span></h2>
+    </div>
+    <div class="intro__body">
+      <p class="lead">המערך הוקם כדי שאזרחים טובים שרוצים לעשות יותר יוכלו לסייע בצרכים אמיתיים של עם ישראל. הקהילה מונה מעל 2,500 מתנדבי סיירות שמסייעים בתחומים רבים.</p>
+      <ul class="arenas" role="list">
+        <li class="arena arena--sky">{{icon:shield}}<h3>הזירה הביטחונית</h3></li>
+        <li class="arena arena--mint">{{icon:heart}}<h3>הזירה הנפשית</h3></li>
+        <li class="arena arena--lilac">{{icon:users}}<h3>הזירה העורפית</h3></li>
+      </ul>
+      <a class="link-arrow" href="about.html">עוד על המערך {{icon:arrow}}</a>
+    </div>
+  </div>
+</section>
+
+<section class="numbers" aria-labelledby="numbers-title">
+  <div class="wrap">
+    <div class="numbers__head">
+      <p class="eyebrow eyebrow--light"><span class="eyebrow__num">02</span> דברו במספרים</p>
+      <h2 id="numbers-title" class="h2 h2--light">מערך אחד. כל הארץ.</h2>
+    </div>
+    {{stats}}
+  </div>
+</section>
+
+<section class="section structure" aria-labelledby="structure-title">
+  <div class="wrap structure__grid">
+    <div>
+      <p class="eyebrow"><span class="eyebrow__num">03</span> מבנה הפיקוד</p>
+      <h2 id="structure-title" class="h2">בנוי כמו מערך צבאי.</h2>
+      <p class="lead">העמותה מסודרת לפי דרגות: מנהל כללי, 4 מפקדי מחוזות, מעל 30 רכזי אזורים ומתנדבי הסיירות הפרוסים בארץ ומוכנים לכל תרחיש.</p>
+      <a class="btn btn--ghost" href="leadership.html">הנהלת המערך הארצי {{icon:arrow}}</a>
+    </div>
+    <ol class="chain" aria-label="מבנה המערך">
+      <li class="chain__step chain__step--1"><span class="chain__n">1</span><span class="chain__t">מנהל כללי</span></li>
+      <li class="chain__step chain__step--2"><span class="chain__n">4</span><span class="chain__t">מפקדי מחוזות</span></li>
+      <li class="chain__step chain__step--3"><span class="chain__n num">30+</span><span class="chain__t">רכזי אזורים</span></li>
+      <li class="chain__step chain__step--4"><span class="chain__n num">2,500+</span><span class="chain__t">מתנדבי סיירות</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--tint districts-sec" aria-labelledby="districts-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span class="eyebrow__num">04</span> הסיירות שלנו</p>
+        <h2 id="districts-title" class="h2">פרוסים מאילת ועד צפת.</h2>
+      </div>
+      <p class="sec-head__p">אפשר להתנדב בסיירות ה-WhatsApp הפרוסות ברחבי הארץ. בחרו מחוז והצטרפו לסיירת שבאזורכם.</p>
+    </div>
+    {{district_cards}}
+  </div>
+</section>
+
+<section class="section services-sec" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span class="eyebrow__num">05</span> שירותים</p>
+        <h2 id="services-title" class="h2">שלוש דרכים להיות חלק.</h2>
+      </div>
+    </div>
+    <ul class="bento" role="list">
+      <li class="bento__item bento__item--a">
+        {{img:ops-room|מתנדב עם אוזניות עובד מול מחשב|bento__img|(max-width: 900px) 100vw, 50vw}}
+        <div class="bento__body">
+          <span class="bento__ico">{{icon:hand}}</span>
+          <h3>להתנדבות בתחומך</h3>
+          <p>לתרום למדינה בצורה הטובה ביותר בתחום התמחותך. מלאו את הטופס, צאו לדרך - ועוד נעשה דברים גדולים ביחד.</p>
+          {{ext:https://forms.gle/KixKasDQdBXEitRj9|צאו לדרך|btn btn--light btn--sm}}
+        </div>
+      </li>
+      <li class="bento__item bento__item--b">
+        <div class="bento__body">
+          <span class="bento__ico">{{icon:box}}</span>
+          <h3>הגמ״ח הגדול</h3>
+          <p>קבלו או תנו דברים. הזבל של אחד הוא הזהב של האחר.</p>
+          {{ext:https://forms.gle/KixKasDQdBXEitRj9|צאו לדרך|btn btn--primary btn--sm}}
+        </div>
+      </li>
+      <li class="bento__item bento__item--c" id="assist-home">
+        <div class="bento__body">
+          <span class="bento__ico">{{icon:shield}}</span>
+          <h3>פתיחת בקשה לסיוע</h3>
+          <p>לקבל שירות בצורה הטובה ביותר בהתאם לבקשתכם. מלאו את הטופס ונשתדל לענות בהקדם.</p>
+          {{ext:https://forms.gle/YgsfcU2v9Gx6Nigt7|לפתיחת בקשה|btn btn--dark btn--sm}}
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--ink endorse-sec" aria-labelledby="endorse-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow eyebrow--light"><span class="eyebrow__num">06</span> המלצות</p>
+        <h2 id="endorse-title" class="h2 h2--light">״זה חסד אמיתי.״</h2>
+      </div>
+      <a class="btn btn--outline-light" href="endorsements.html">לכל ההמלצות {{icon:arrow}}</a>
+    </div>
+    {{testimonials_featured}}
+  </div>
+</section>
+
+<section class="section video-sec" aria-labelledby="video-title">
+  <div class="wrap video__grid">
+    <div>
+      <p class="eyebrow"><span class="eyebrow__num">07</span> וידאו עלינו</p>
+      <h2 id="video-title" class="h2">חבר מביא חבר.</h2>
+      <p class="lead">כל מתנדבי החמ״ל של מגן דוד לבן מגיעים בשיטת חבר מביא חבר, על מנת לשמור על ביטחון המידע.</p>
+      <p>כולנו מתאחדים ומתנדבים בארגון העזרה הארצי. מוזמנים להצטרף לקהילה ולהיות שותפים לנצח.</p>
+      <a class="link-arrow" href="media.html">לגלריה ולסרטונים {{icon:arrow}}</a>
+    </div>
+    {{main_video}}
+  </div>
+</section>
+
+<section class="donate-band" aria-labelledby="donate-title">
+  {{img:flag-pole||donate-band__img|100vw}}
+  <div class="wrap donate-band__in">
+    <div>
+      <p class="eyebrow"><span class="eyebrow__num">08</span> תרומה</p>
+      <h2 id="donate-title" class="h2">כל שקל יעזור.</h2>
+      <p class="lead">אחד הדברים הנחוצים ביותר לקיום המערך הוא עזרה כספית. כל תרומה תתקבל בברכה.</p>
+    </div>
+    <div class="donate-band__b">
+      {{ext:https://payboxapp.page.link/h2UYKxHXzxFGvE648|תרומה בפייבוקס|btn btn--primary btn--lg}}
+      {{ext:https://www.bitpay.co.il/app/me/20FE7E13-B09F-13C7-A703-C8230A8C88D2D474|תרומה בביט|btn btn--dark btn--lg}}
+    </div>
+  </div>
+</section>

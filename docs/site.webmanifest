@@ -1,0 +1,15 @@
+{
+  "name": "מגן דוד לבן",
+  "short_name": "מגן דוד לבן",
+  "description": "מערך ההתנדבות הארצי - הצלה מעבר לרפואה",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f9ff",
+  "theme_color": "#0b1730",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
