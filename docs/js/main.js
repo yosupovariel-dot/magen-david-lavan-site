@@ -14,36 +14,88 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  /* ---------- תפריט נייד ---------- */
+  /* ---------- תפריט נייד (מסך מלא) ---------- */
   var toggle = document.querySelector(".nav-toggle");
-  var nav = document.getElementById("nav");
-  var scrim = null;
-  function setNav(open) {
-    if (!toggle || !nav) return;
-    toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "סגירת תפריט" : "פתיחת תפריט");
-    toggle.querySelector("use").setAttribute("href", open ? "#i-close" : "#i-menu");
-    nav.classList.toggle("is-open", open);
-    header.classList.toggle("nav-open", open);
-    if (open) {
-      scrim = document.createElement("div");
-      scrim.className = "scrim";
-      scrim.addEventListener("click", function () { setNav(false); });
-      document.body.appendChild(scrim);
-      var first = nav.querySelector("a");
-      if (first) first.focus();
-    } else if (scrim) {
-      scrim.remove();
-      scrim = null;
-    }
+  var mnav = document.getElementById("mnav");
+  var lastFocus = null;
+  function focusables() {
+    return Array.prototype.slice.call(mnav.querySelectorAll("a[href], button:not([disabled])"));
   }
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () { setNav(toggle.getAttribute("aria-expanded") !== "true"); });
-    document.addEventListener("keydown", function (ev) {
-      if (ev.key === "Escape" && nav.classList.contains("is-open")) { setNav(false); toggle.focus(); }
+  function openMenu() {
+    lastFocus = document.activeElement;
+    mnav.hidden = false;
+    root.classList.add("no-scroll");
+    toggle.setAttribute("aria-expanded", "true");
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () { mnav.classList.add("is-open"); });
     });
-    window.matchMedia("(min-width: 1081px)").addEventListener("change", function (m) { if (m.matches) setNav(false); });
+    var close = mnav.querySelector(".mnav__close");
+    if (close) close.focus();
   }
+  function closeMenu(restore) {
+    if (mnav.hidden) return;
+    mnav.classList.remove("is-open");
+    root.classList.remove("no-scroll");
+    toggle.setAttribute("aria-expanded", "false");
+    window.setTimeout(function () { mnav.hidden = true; }, motionOff() ? 0 : 320);
+    if (restore !== false && lastFocus) lastFocus.focus();
+  }
+  if (toggle && mnav) {
+    toggle.addEventListener("click", openMenu);
+    mnav.querySelector(".mnav__close").addEventListener("click", function () { closeMenu(); });
+    mnav.addEventListener("click", function (ev) {
+      if (ev.target.closest("a[href]")) closeMenu(false);
+    });
+    mnav.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") { ev.preventDefault(); closeMenu(); return; }
+      if (ev.key !== "Tab") return;
+      var f = focusables(); if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); last.focus(); }
+      else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+    });
+    window.matchMedia("(min-width: 1081px)").addEventListener("change", function (m) { if (m.matches) closeMenu(false); });
+  }
+
+  /* ---------- קרוסלת המלצות (נייד) ---------- */
+  document.querySelectorAll("[data-rail]").forEach(function (rail) {
+    var list = rail.querySelector(".quotes--rail");
+    var items = list.querySelectorAll(".quote");
+    var prev = rail.querySelector('[data-dir="prev"]');
+    var next = rail.querySelector('[data-dir="next"]');
+    var fill = rail.querySelector(".rail__fill");
+    var cur = rail.querySelector(".rail__cur");
+    function index() {
+      var best = 0, bestD = Infinity, lr = list.getBoundingClientRect();
+      items.forEach(function (it, i) {
+        var d = Math.abs(it.getBoundingClientRect().right - lr.right);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      return best;
+    }
+    function update() {
+      var max = list.scrollWidth - list.clientWidth;
+      var pos = Math.abs(list.scrollLeft);
+      var i = index();
+      fill.style.transform = "scaleX(" + (i + 1) / items.length + ")";
+      cur.textContent = String(i + 1);
+      prev.disabled = pos < 4;
+      next.disabled = pos > max - 4;
+    }
+    function go(dir) {
+      var i = Math.max(0, Math.min(items.length - 1, index() + dir));
+      items[i].scrollIntoView({ behavior: motionOff() ? "auto" : "smooth", block: "nearest", inline: "start" });
+    }
+    prev.addEventListener("click", function () { go(-1); });
+    next.addEventListener("click", function () { go(1); });
+    var raf = 0;
+    list.addEventListener("scroll", function () {
+      if (raf) return;
+      raf = window.requestAnimationFrame(function () { raf = 0; update(); });
+    }, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  });
 
   /* ---------- מונים ---------- */
   var counters = document.querySelectorAll(".count[data-to]");

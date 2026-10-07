@@ -76,10 +76,38 @@
     </nav>
     <div class="header__actions">
       <a class="btn btn--donate" href="donate.html">{{icon:heart}}<span>תרומה</span></a>
-      <button class="iconbtn nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="פתיחת תפריט">{{icon:menu}}</button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mnav" aria-label="פתיחת תפריט">
+        <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="nav-toggle__t" aria-hidden="true">תפריט</span>
+      </button>
     </div>
   </div>
 </header>
+
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="תפריט ניווט" hidden>
+  <div class="mnav__head">
+    <a class="brand" href="index.html">
+      <img class="brand__logo" src="assets/img/logo-160.webp" width="44" height="44" alt="">
+      <span class="brand__txt"><span class="brand__name">מגן דוד לבן</span></span>
+    </a>
+    <button class="mnav__close" type="button" aria-label="סגירת תפריט">{{icon:close}}</button>
+  </div>
+  <nav class="mnav__nav" aria-label="ניווט ראשי - נייד">
+    <ol class="mnav__list" role="list">%MNAV%</ol>
+  </nav>
+  <div class="mnav__foot">
+    <a class="mnav__line mnav__line--sos" href="tel:{{emergency_line.tel}}">
+      <span class="mnav__line-k"><span class="pulse" aria-hidden="true"></span> {{emergency_line.label}}</span>
+      <span class="mnav__line-n" dir="ltr">{{emergency_line.display}}</span>
+    </a>
+    <a class="mnav__line" href="tel:{{volunteer_line.tel}}">
+      <span class="mnav__line-k">{{volunteer_line.label}}</span>
+      <span class="mnav__line-n" dir="ltr">{{volunteer_line.display}}</span>
+    </a>
+    <a class="btn btn--primary btn--lg mnav__donate" href="donate.html">{{icon:heart}} תרומה למערך</a>
+    {{social}}
+  </div>
+</div>
 
 <main id="main" tabindex="-1">
 %CONTENT%

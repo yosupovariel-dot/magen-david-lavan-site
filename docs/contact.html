@@ -76,10 +76,38 @@
     </nav>
     <div class="header__actions">
       <a class="btn btn--donate" href="donate.html"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-heart"/></svg><span>תרומה</span></a>
-      <button class="iconbtn nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="פתיחת תפריט"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg></button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mnav" aria-label="פתיחת תפריט">
+        <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="nav-toggle__t" aria-hidden="true">תפריט</span>
+      </button>
     </div>
   </div>
 </header>
+
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="תפריט ניווט" hidden>
+  <div class="mnav__head">
+    <a class="brand" href="index.html">
+      <img class="brand__logo" src="assets/img/logo-160.webp" width="44" height="44" alt="">
+      <span class="brand__txt"><span class="brand__name">מגן דוד לבן</span></span>
+    </a>
+    <button class="mnav__close" type="button" aria-label="סגירת תפריט"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button>
+  </div>
+  <nav class="mnav__nav" aria-label="ניווט ראשי - נייד">
+    <ol class="mnav__list" role="list"><li><a href="index.html"><span class="mnav__n" aria-hidden="true">01</span><span class="mnav__t">ראשי</span><svg class="ico mnav__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li><li><a href="about.html"><span class="mnav__n" aria-hidden="true">02</span><span class="mnav__t">אודות</span><svg class="ico mnav__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li><li><a href="patrols.html"><span class="mnav__n" aria-hidden="true">03</span><span class="mnav__t">הסיירות</span><svg class="ico mnav__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li><li><a href="services.html"><span class="mnav__n" aria-hidden="true">04</span><span class="mnav__t">שירותים</span><svg class="ico mnav__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li><li><a href="leadership.html"><span class="mnav__n" aria-hidden="true">05</span><span class="mnav__t">הנהלה</span><svg class="ico mnav__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li><li><a href="endorsements.html"><span class="mnav__n" aria-hidden="true">06</span><span class="mnav__t">המלצות</span><svg class="ico mnav__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li><li><a href="media.html"><span class="mnav__n" aria-hidden="true">07</span><span class="mnav__t">מדיה</span><svg class="ico mnav__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li><li><a href="contact.html" aria-current="page"><span class="mnav__n" aria-hidden="true">08</span><span class="mnav__t">צור קשר</span><svg class="ico mnav__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li><li><a href="accessibility.html"><span class="mnav__n" aria-hidden="true">09</span><span class="mnav__t">נגישות</span><svg class="ico mnav__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></li></ol>
+  </nav>
+  <div class="mnav__foot">
+    <a class="mnav__line mnav__line--sos" href="tel:+972537994199">
+      <span class="mnav__line-k"><span class="pulse" aria-hidden="true"></span> מוקד חירום ארצי</span>
+      <span class="mnav__line-n" dir="ltr">053-7994-199</span>
+    </a>
+    <a class="mnav__line" href="tel:+972504126351">
+      <span class="mnav__line-k">מוקד התנדבות ארצי</span>
+      <span class="mnav__line-n" dir="ltr">050-4126-351</span>
+    </a>
+    <a class="btn btn--primary btn--lg mnav__donate" href="donate.html"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-heart"/></svg> תרומה למערך</a>
+    <ul class="social" role="list"><li><a href="https://www.facebook.com/profile.php?id=61553693558027" target="_blank" rel="noopener noreferrer" aria-label="פייסבוק"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-facebook"/></svg><span class="social__t">פייסבוק</span><span class="sr-only"> (נפתח בחלון חדש)</span></a></li><li><a href="https://www.youtube.com/channel/UCTONx1UmEGpipkcWXj9Cz1Q" target="_blank" rel="noopener noreferrer" aria-label="יוטיוב"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg><span class="social__t">יוטיוב</span><span class="sr-only"> (נפתח בחלון חדש)</span></a></li><li><a href="https://www.instagram.com/invites/contact/?i=10jhyj2de4m3o&amp;utm_content=tg1hv2x" target="_blank" rel="noopener noreferrer" aria-label="אינסטגרם"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg><span class="social__t">אינסטגרם</span><span class="sr-only"> (נפתח בחלון חדש)</span></a></li><li><a href="https://wa.me/972504552025" target="_blank" rel="noopener noreferrer" aria-label="סטטוסים בוואטסאפ"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="social__t">סטטוסים בוואטסאפ</span><span class="sr-only"> (נפתח בחלון חדש)</span></a></li></ul>
+  </div>
+</div>
 
 <main id="main" tabindex="-1">
 

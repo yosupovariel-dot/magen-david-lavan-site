@@ -59,12 +59,50 @@ def picture(name, alt, cls="", sizes="100vw", eager=False, w=1600, h=1067):
 # ---------- רכיבים ----------
 
 def stats_block():
-    items = []
-    for st in S["stats"]:
-        items.append(
-            f'<div class="stat"><dt class="stat__label">{e(st["label"])}</dt>'
-            f'<dd class="stat__num"><span class="count" data-to="{st["value"]}">{st["value"]:,}</span><span class="stat__plus">+</span></dd></div>')
-    return '<dl class="stats">' + "".join(items) + "</dl>"
+    vol, helped, comp = S["stats"]
+    ds = DATA["districts"]
+    total = sum(len(d["patrols"]) for d in ds)
+
+    def num(v):
+        return (f'<p class="impact__num"><span class="count" data-to="{v}">{v:,}</span>'
+                f'<span class="impact__plus" aria-hidden="true">+</span></p>')
+
+    bar = "".join(f'<span class="tone-{d["tone"]} g{len(d["patrols"])}"></span>' for d in ds)
+    legend = "".join(f'<li><i class="tone-{d["tone"]}" aria-hidden="true"></i>{e(d["name"].replace("מחוז ", ""))} <b>{len(d["patrols"])}</b></li>'
+                     for d in ds)
+    return f'''
+<div class="impact">
+  <div class="impact__tile impact__tile--feat">
+    <svg class="impact__hex" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 14 174 142H26zM100 186 26 58h148z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+    <span class="impact__ico">{icon("heart")}</span>
+    {num(helped["value"])}
+    <p class="impact__label">{e(helped["label"])}</p>
+    <p class="impact__note">בזירה הביטחונית, בזירה הנפשית ובזירה העורפית.</p>
+  </div>
+  <div class="impact__tile impact__tile--vol">
+    <span class="impact__ico">{icon("users")}</span>
+    {num(vol["value"])}
+    <p class="impact__label">{e(vol["label"])}</p>
+    <p class="impact__note">מתנדבי סיירות הפרוסים בכל חלקי הארץ.</p>
+  </div>
+  <div class="impact__tile impact__tile--comp">
+    <span class="impact__ico">{icon("hand")}</span>
+    {num(comp["value"])}
+    <p class="impact__label">{e(comp["label"])}</p>
+    <p class="impact__note">גופים שבחרו לעבוד לצד המערך.</p>
+  </div>
+  <div class="impact__tile impact__tile--patrols">
+    <div class="impact__row">
+      <div>
+        <p class="impact__label">סיירות אזוריות</p>
+        <p class="impact__note">ב-{len(ds)} מחוזות, מאילת ועד צפת.</p>
+      </div>
+      <p class="impact__num"><span>{total}</span></p>
+    </div>
+    <div class="impact__bar" role="img" aria-label="{e("פילוח הסיירות לפי מחוז: " + ", ".join(d["name"] + " " + str(len(d["patrols"])) for d in ds))}">{bar}</div>
+    <ul class="impact__legend" aria-hidden="true">{legend}</ul>
+  </div>
+</div>'''
 
 
 def patrol_card(p, d):
@@ -157,7 +195,15 @@ def testimonials_all():
 
 def testimonials_featured():
     fs = [t for t in DATA["testimonials"] if t["featured"]][:6]
-    return '<ul class="quotes quotes--rail" role="list">' + "".join(quote_card(t) for t in fs) + "</ul>"
+    return ('<div class="rail" data-rail>'
+            '<ul class="quotes quotes--rail" role="list" tabindex="0" aria-label="המלצות נבחרות - ניתן לגלול הצידה">'
+            + "".join(quote_card(t) for t in fs) + "</ul>"
+            '<div class="rail__ctrl">'
+            f'<button type="button" class="rail__btn" data-dir="prev" aria-label="ההמלצה הקודמת">{icon("arrow", "ico rail__ico--prev")}</button>'
+            '<div class="rail__track" aria-hidden="true"><span class="rail__fill"></span></div>'
+            f'<p class="rail__count" aria-live="polite"><b class="rail__cur">1</b> / {len(fs)}</p>'
+            f'<button type="button" class="rail__btn" data-dir="next" aria-label="ההמלצה הבאה">{icon("arrow")}</button>'
+            '</div></div>')
 
 
 def ticker():
@@ -276,6 +322,18 @@ def nav_html(slug, mobile=False):
     return "".join(items)
 
 
+def mnav_html(slug):
+    items = []
+    for i, (href, label) in enumerate(NAV, 1):
+        cur = ' aria-current="page"' if href == slug else ""
+        items.append(f'<li><a href="{href}"{cur}><span class="mnav__n" aria-hidden="true">{i:02d}</span>'
+                     f'<span class="mnav__t">{label}</span>{icon("arrow", "ico mnav__arrow")}</a></li>')
+    items.append(f'<li><a href="accessibility.html"{" aria-current=\"page\"" if slug == "accessibility.html" else ""}>'
+                 f'<span class="mnav__n" aria-hidden="true">{len(NAV) + 1:02d}</span><span class="mnav__t">נגישות</span>'
+                 f'{icon("arrow", "ico mnav__arrow")}</a></li>')
+    return "".join(items)
+
+
 def build():
     layout = (SRC / "layout.html").read_text(encoding="utf-8")
     pages = sorted((SRC / "pages").glob("*.html"))
@@ -304,6 +362,7 @@ def build():
             "%ROBOTS%": meta.get("robots", "index,follow,max-image-preview:large"),
             "%JSONLD%": ld_html,
             "%NAV%": nav_html(slug),
+            "%MNAV%": mnav_html(slug),
             "%BODYCLASS%": meta.get("bodyclass", ""),
             "%PRELOAD%": (f'<link rel="preload" as="image" href="assets/img/{meta["preload"]}-1600.webp" '
                           f'imagesrcset="assets/img/{meta["preload"]}-800.webp 800w, assets/img/{meta["preload"]}-1600.webp 1600w" imagesizes="100vw">'
