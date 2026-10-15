@@ -41,7 +41,7 @@
       "commander_note": "אחראי רישום עמותה, בירוקרטיות, תקציבים ולוגיסטיקה.",
       "hotline": "050-4552-025",
       "group": "https://chat.whatsapp.com/JQwLIwmySrq5lMlowsvAVr",
-      "image": "galilee",
+      "image": "v-tank",
       "areas": "צפת, עפולה, נתניה, רעננה וחיפה",
       "patrols": [
         { "city": "רעננה", "manager": "דביר מורדיאן", "phone": "054-773-0433", "group": "https://chat.whatsapp.com/E4malDm0zF2EL0fCqrv7Fi" },
@@ -60,7 +60,7 @@
       "commander_note": "",
       "hotline": "054-7730-433",
       "group": "https://chat.whatsapp.com/DBodmjpVvLo9tlhzMxNspe",
-      "image": "tel-aviv",
+      "image": "v-fields",
       "areas": "ירושלים, תל אביב, בת ים, פתח תקווה, רמת השרון, ראשון לציון, מודיעין, הרצליה, גני תקווה ורחובות",
       "patrols": [
         { "city": "ירושלים", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/GA9KLM4eyRW88aDIuCN9vK" },
@@ -84,7 +84,7 @@
       "commander_note": "",
       "hotline": "058-695-8567",
       "group": "https://chat.whatsapp.com/KkNy9FSkvNxFc0a7bUrV8w",
-      "image": "olive-grove",
+      "image": "v-car",
       "areas": "כוכב השחר, קרית ארבע, הר ברכה, עלי, עפרה, עץ אפרים, שערי תקווה ותלם",
       "patrols": [
         { "city": "קריית ארבע", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/HEKHFdYMhOU0OAEWYQ0Te8" },
@@ -105,7 +105,7 @@
       "commander_note": "",
       "hotline": "058-563-0059",
       "group": "",
-      "image": "negev",
+      "image": "v-truck",
       "areas": "אילת, אשדוד, אשקלון, באר שבע, בית שמש, נתיבות, קרית גת ושדרות",
       "patrols": [
         { "city": "אילת", "manager": "", "phone": "", "group": "https://chat.whatsapp.com/JOvkwuMRVGWAigMBB1myv3" },

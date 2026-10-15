@@ -13,6 +13,9 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
 OUT = ROOT / "docs"
 DATA = json.loads((SRC / "data.json").read_text(encoding="utf-8"))
+_EMB = json.loads((SRC / "emblems.json").read_text(encoding="utf-8")) if (SRC / "emblems.json").exists() else {}
+EMBLEMS = _EMB.get("map", {})
+DISTRICT_LOGOS = _EMB.get("districts", {})
 S = DATA["site"]
 TODAY = date.today().isoformat()
 VERSION = TODAY.replace("-", "")
@@ -122,15 +125,16 @@ def initials(city):
     return letters[0] + "״" + letters[1]
 
 
-def district_emblem(d, cls="emblem"):
-    return (f'<svg class="{cls} {cls}--{d["tone"]}" viewBox="0 0 80 92" aria-hidden="true" focusable="false">'
-            '<path class="emblem__shield" d="M40 3 75 15v28c0 22-15 39-35 46C20 82 5 65 5 43V15z"/>'
-            '<path class="emblem__inner" d="M40 9 69 19v24c0 18.5-12.4 33-29 39.4C23.4 76 11 61.5 11 43V19z"/>'
-            '<path class="emblem__star" d="M40 16 52 37H28zM40 51 28 30h24z"/>'
-            f'<text class="emblem__t" x="40" y="70" text-anchor="middle">{e(SHORT.get(d["id"], ""))}</text></svg>')
+def district_emblem(d, cls="dlogo"):
+    return (f'<span class="{cls} {cls}--{d["tone"]}" aria-hidden="true">'
+            f'<img src="assets/{("emblems/" + DISTRICT_LOGOS[d["id"]]) if d["id"] in DISTRICT_LOGOS else "img/logo-160.webp"}" width="72" height="72" alt="">'
+            f'<span class="{cls}__t">{e(SHORT.get(d["id"], ""))}</span></span>')
 
 
 def city_badge(city, tone):
+    if city in EMBLEMS:
+        return (f'<span class="cbadge cbadge--img cbadge--{tone}" aria-hidden="true">'
+                f'<img src="assets/emblems/{EMBLEMS[city]}" width="56" height="56" alt="" loading="lazy" decoding="async"></span>')
     t = initials(city)
     small = " cbadge--sm" if len(t) > 3 else ""
     return f'<span class="cbadge cbadge--{tone}{small}" aria-hidden="true">{e(t)}</span>'
@@ -263,6 +267,36 @@ def testimonials_rail():
             '</div></div>')
 
 
+GALLERY_CATS = [("security", "מתנדבינו בביטחון"), ("agriculture", "מתנדבינו בחקלאות"), ("transport", "מתנדבינו בשינועים")]
+
+
+def gallery():
+    data = json.loads((SRC / "gallery.json").read_text(encoding="utf-8"))
+    tabs, panels = [], []
+    for i, (key, label) in enumerate(GALLERY_CATS):
+        sel = i == 0
+        items = data.get(key, [])
+        tabs.append(f'<button type="button" class="gtab" role="tab" id="gt-{key}" aria-controls="gp-{key}" '
+                    f'aria-selected="{"true" if sel else "false"}" tabindex="{0 if sel else -1}">{e(label)} '
+                    f'<span class="gtab__n">{len(items)}</span></button>')
+        figs = "".join(
+            f'<li class="gitem"><a class="gitem__a" href="assets/gallery/{it["f"]}.webp" data-lightbox="{key}" '
+            f'data-w="{it["w"]}" data-h="{it["h"]}">'
+            f'<img src="assets/gallery/{it["f"]}-s.webp" width="{it["tw"]}" height="{it["th"]}" '
+            f'alt="{e(label)} - תמונה {n} מתוך {len(items)}" loading="lazy" decoding="async"></a></li>'
+            for n, it in enumerate(items, 1))
+        panels.append(f'<div class="gpanel" role="tabpanel" id="gp-{key}" aria-labelledby="gt-{key}"{"" if sel else " hidden"}>'
+                      f'<ul class="ggrid" role="list">{figs}</ul></div>')
+    return (f'<div class="gallery"><div class="gtabs" role="tablist" aria-label="קטגוריות הגלריה">{"".join(tabs)}</div>'
+            + "".join(panels) +
+            '<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="צפייה בתמונה" hidden>'
+            f'<button type="button" class="lb__close" aria-label="סגירה">{icon("close")}</button>'
+            f'<button type="button" class="lb__nav lb__nav--prev" aria-label="התמונה הקודמת">{icon("arrow", "ico rail__ico--prev")}</button>'
+            '<figure class="lb__fig"><img class="lb__img" alt=""><figcaption class="lb__cap" aria-live="polite"></figcaption></figure>'
+            f'<button type="button" class="lb__nav lb__nav--next" aria-label="התמונה הבאה">{icon("arrow")}</button>'
+            '</div></div>')
+
+
 THANKS = [
     ("עיצוב ובניית האתר", "ArielYosupov-WebDesign", "https://arielyosupov-webdesign.com", "האתר עוצב ונבנה מחדש על ידי ArielYosupov-WebDesign."),
     ("תודות", "SearchAOA", "https://www.searchaoa.com/", "תודה לצוותי SearchAOA."),
@@ -334,6 +368,7 @@ COMPONENTS = {
     "leaders": leaders,
     "testimonials_rail": testimonials_rail,
     "thanks": thanks,
+    "gallery": gallery,
     "ticker": ticker,
     "main_video": lambda: video_facade(S["main_video"], "מגן דוד לבן - וידאו עלינו"),
     "social": social_links,

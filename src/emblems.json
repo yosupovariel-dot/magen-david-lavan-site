@@ -1,0 +1,40 @@
+{
+ "map": {
+  "רעננה": "patrol-01.webp",
+  "חיפה": "patrol-02.webp",
+  "נתניה": "patrol-03.webp",
+  "צפת": "patrol-04.webp",
+  "עפולה": "patrol-05.webp",
+  "ירושלים": "patrol-07.webp",
+  "תל אביב": "patrol-08.webp",
+  "בת ים": "patrol-09.webp",
+  "פתח תקווה": "patrol-10.webp",
+  "רמת השרון": "patrol-11.webp",
+  "ראשון לציון": "patrol-12.webp",
+  "מודיעין": "patrol-13.webp",
+  "הרצליה": "patrol-14.webp",
+  "גני תקווה": "patrol-15.webp",
+  "רחובות": "patrol-16.webp",
+  "קריית ארבע": "patrol-18.webp",
+  "תלם": "patrol-19.webp",
+  "הר ברכה": "patrol-20.webp",
+  "כוכב השחר": "patrol-21.webp",
+  "עלי": "patrol-22.webp",
+  "עפרה": "patrol-23.webp",
+  "שערי תקווה": "patrol-24.webp",
+  "אילת": "patrol-26.webp",
+  "אשדוד": "patrol-27.webp",
+  "אשקלון": "patrol-28.webp",
+  "באר שבע": "patrol-29.webp",
+  "בית שמש": "patrol-30.webp",
+  "נתיבות": "patrol-31.webp",
+  "קריית גת": "patrol-32.webp",
+  "שדרות": "patrol-33.webp"
+ },
+ "districts": {
+  "north": "district-north.webp",
+  "center": "district-center.webp",
+  "judea-samaria": "district-judea-samaria.webp",
+  "south": "district-south.webp"
+ }
+}

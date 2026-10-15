@@ -105,6 +105,78 @@
     update();
   });
 
+  /* ---------- גלריה: לשוניות + תצוגה מוגדלת ---------- */
+  var gtabs = Array.prototype.slice.call(document.querySelectorAll(".gtab"));
+  function selectTab(t, focus) {
+    gtabs.forEach(function (x) {
+      var on = x === t;
+      x.setAttribute("aria-selected", String(on));
+      x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) t.focus();
+  }
+  gtabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { selectTab(t); });
+    t.addEventListener("keydown", function (ev) {
+      var n = null;
+      if (ev.key === "ArrowLeft") n = gtabs[(i + 1) % gtabs.length];
+      else if (ev.key === "ArrowRight") n = gtabs[(i - 1 + gtabs.length) % gtabs.length];
+      else if (ev.key === "Home") n = gtabs[0];
+      else if (ev.key === "End") n = gtabs[gtabs.length - 1];
+      if (n) { ev.preventDefault(); selectTab(n, true); }
+    });
+  });
+
+  var lb = document.getElementById("lightbox");
+  if (lb) {
+    var lbImg = lb.querySelector(".lb__img"), lbCap = lb.querySelector(".lb__cap");
+    var set = [], pos = 0, opener = null;
+    function show(i) {
+      pos = (i + set.length) % set.length;
+      var a = set[pos];
+      lbImg.src = a.getAttribute("href");
+      lbImg.alt = a.querySelector("img").alt;
+      lbCap.textContent = (pos + 1) + " / " + set.length;
+    }
+    function close() {
+      lb.hidden = true; root.classList.remove("no-scroll"); lbImg.removeAttribute("src");
+      if (opener) opener.focus();
+    }
+    document.addEventListener("click", function (ev) {
+      var a = ev.target.closest("a[data-lightbox]");
+      if (!a) return;
+      ev.preventDefault();
+      opener = a;
+      set = Array.prototype.slice.call(document.querySelectorAll('a[data-lightbox="' + a.getAttribute("data-lightbox") + '"]'));
+      show(set.indexOf(a));
+      lb.hidden = false; root.classList.add("no-scroll");
+      lb.querySelector(".lb__close").focus();
+    });
+    lb.querySelector(".lb__close").addEventListener("click", close);
+    lb.querySelector(".lb__nav--prev").addEventListener("click", function () { show(pos - 1); });
+    lb.querySelector(".lb__nav--next").addEventListener("click", function () { show(pos + 1); });
+    lb.addEventListener("click", function (ev) { if (ev.target === lb) close(); });
+    lb.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") close();
+      else if (ev.key === "ArrowLeft") show(pos + 1);
+      else if (ev.key === "ArrowRight") show(pos - 1);
+      else if (ev.key === "Tab") {
+        var f = Array.prototype.slice.call(lb.querySelectorAll("button"));
+        var i = f.indexOf(document.activeElement);
+        ev.preventDefault();
+        f[(i + (ev.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+      }
+    });
+    var tx = null;
+    lb.addEventListener("touchstart", function (ev) { tx = ev.touches[0].clientX; }, { passive: true });
+    lb.addEventListener("touchend", function (ev) {
+      if (tx === null) return;
+      var dx = ev.changedTouches[0].clientX - tx; tx = null;
+      if (Math.abs(dx) > 50) show(pos + (dx > 0 ? 1 : -1));
+    });
+  }
+
   /* ---------- מונים ---------- */
   var counters = document.querySelectorAll(".count[data-to]");
   function fmt(n) { return n.toLocaleString("en-US"); }
