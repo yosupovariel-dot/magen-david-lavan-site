@@ -393,9 +393,37 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
 }
 .hero__lead { font-size: clamp(1.1rem, 1.55vw, 1.3rem); color: var(--ink-soft); max-width: 36ch; }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.8rem; }
-.hero__proof { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 2.2rem; padding-top: 1.4rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; }
 .num { direction: ltr; unicode-bidi: isolate; display: inline-block; }
-.hero__proof b { font-family: var(--f-num); font-size: 2rem; line-height: 1; color: var(--ink); margin-inline-end: .2em; vertical-align: -.12em; }
+.proof {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  margin: 2.2rem 0 0; max-width: 520px;
+  background: rgba(255, 255, 255, .72);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .9); border-radius: var(--r-l);
+  box-shadow: 0 1px 2px rgba(11, 23, 48, .05), 0 16px 34px -20px rgba(11, 23, 48, .3);
+  overflow: hidden;
+}
+.proof__item {
+  position: relative; display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px;
+  padding: 16px 18px 15px;
+}
+.proof__item + .proof__item::before {
+  content: ""; position: absolute; inset-block: 18px; inset-inline-start: 0; width: 1px; background: var(--line);
+}
+.proof__item:first-child::after {
+  content: ""; position: absolute; inset-inline: 30px 18px; top: 0; height: 3px; border-radius: 0 0 3px 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+}
+.proof__n { display: flex; align-items: flex-start; justify-content: flex-end; gap: 2px; direction: ltr; margin: 0; font-family: var(--f-num); font-weight: 700; font-size: 2.5rem; line-height: .9; color: var(--ink); }
+.proof__n i { font-style: normal; font-family: var(--f-body); font-size: .9rem; line-height: 1; color: var(--blue); margin-top: .1em; }
+.proof__k { font-size: .86rem; font-weight: 600; color: var(--muted); line-height: 1.3; }
+@media (max-width: 900px) { .proof { max-width: none; } }
+@media (max-width: 420px) {
+  .proof__item { padding: 14px 12px 13px; }
+  .proof__item:first-child::after { inset-inline: 26px 12px; }
+  .proof__n { font-size: 2.15rem; }
+  .proof__k { font-size: .78rem; }
+}
 
 .hero__art { position: relative; aspect-ratio: 5 / 5.6; max-width: 580px; justify-self: end; width: 100%; }
 .hero__main {
