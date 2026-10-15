@@ -68,7 +68,7 @@ def stats_block():
                 f'<span class="impact__plus" aria-hidden="true">+</span></p>')
 
     bar = "".join(f'<span class="tone-{d["tone"]} g{len(d["patrols"])}"></span>' for d in ds)
-    legend = "".join(f'<li><i class="tone-{d["tone"]}" aria-hidden="true"></i>{e(d["name"].replace("מחוז ", ""))} <b>{len(d["patrols"])}</b></li>'
+    legend = "".join(f'<span class="impact__lg"><i class="tone-{d["tone"]}"></i>{e(d["name"].replace("מחוז ", ""))} <b>{len(d["patrols"])}</b></span>'
                      for d in ds)
     return f'''
 <div class="impact">
@@ -91,18 +91,49 @@ def stats_block():
     <p class="impact__label">{e(comp["label"])}</p>
     <p class="impact__note">גופים שבחרו לעבוד לצד המערך.</p>
   </div>
-  <div class="impact__tile impact__tile--patrols">
-    <div class="impact__row">
-      <div>
-        <p class="impact__label">סיירות אזוריות</p>
-        <p class="impact__note">ב-{len(ds)} מחוזות, מאילת ועד צפת.</p>
-      </div>
-      <p class="impact__num"><span>{total}</span></p>
-    </div>
-    <div class="impact__bar" role="img" aria-label="{e("פילוח הסיירות לפי מחוז: " + ", ".join(d["name"] + " " + str(len(d["patrols"])) for d in ds))}">{bar}</div>
-    <ul class="impact__legend" aria-hidden="true">{legend}</ul>
-  </div>
+  <a class="impact__tile impact__tile--patrols" href="patrols.html">
+    <span class="impact__row">
+      <span>
+        <span class="impact__label"><span class="sr-only">{total} </span>סיירות אזוריות</span>
+        <span class="impact__note">ב-{len(ds)} מחוזות, מאילת ועד צפת.</span>
+      </span>
+      <span class="impact__num" aria-hidden="true"><span>{total}</span></span>
+    </span>
+    <span class="impact__bar" aria-hidden="true">{bar}</span>
+    <span class="impact__legend" aria-hidden="true">{legend}</span>
+    <span class="impact__go">לכל הסיירות{icon("arrow")}</span>
+  </a>
 </div>'''
+
+
+SHORT = {"north": "צפון", "center": "מרכז", "judea-samaria": "יו״ש", "south": "דרום"}
+
+
+ABBR = {"ראשון לציון": "ראשל״צ"}
+
+
+def initials(city):
+    if city in ABBR:
+        return ABBR[city]
+    words = city.replace("-", " ").split()
+    if len(words) == 1:
+        return words[0][0]
+    letters = [w[0] for w in words[:2]]
+    return letters[0] + "״" + letters[1]
+
+
+def district_emblem(d, cls="emblem"):
+    return (f'<svg class="{cls} {cls}--{d["tone"]}" viewBox="0 0 80 92" aria-hidden="true" focusable="false">'
+            '<path class="emblem__shield" d="M40 3 75 15v28c0 22-15 39-35 46C20 82 5 65 5 43V15z"/>'
+            '<path class="emblem__inner" d="M40 9 69 19v24c0 18.5-12.4 33-29 39.4C23.4 76 11 61.5 11 43V19z"/>'
+            '<path class="emblem__star" d="M40 16 52 37H28zM40 51 28 30h24z"/>'
+            f'<text class="emblem__t" x="40" y="70" text-anchor="middle">{e(SHORT.get(d["id"], ""))}</text></svg>')
+
+
+def city_badge(city, tone):
+    t = initials(city)
+    small = " cbadge--sm" if len(t) > 3 else ""
+    return f'<span class="cbadge cbadge--{tone}{small}" aria-hidden="true">{e(t)}</span>'
 
 
 def patrol_card(p, d):
@@ -115,7 +146,8 @@ def patrol_card(p, d):
         meta.append(f'<p class="patrol__meta patrol__meta--muted">לפרטים: מוקד המחוז {tel_link(d["hotline"])}</p>')
     join = ext(p["group"], f'{icon("whatsapp")} הצטרפות לסיירת<span class="sr-only"> {e(p["city"])} בוואטסאפ</span>',
                "btn btn--ghost btn--sm") if p["group"] else ""
-    return (f'<li class="patrol" data-city="{e(p["city"])}"><h3 class="patrol__city">סיירת {e(p["city"])}</h3>'
+    return (f'<li class="patrol" data-city="{e(p["city"])}"><div class="patrol__head">{city_badge(p["city"], d["tone"])}'
+            f'<h3 class="patrol__city">סיירת {e(p["city"])}</h3></div>'
             + "".join(meta) + join + "</li>")
 
 
@@ -132,7 +164,7 @@ def patrols_full():
     <div class="district__media">{picture(d["image"], "", "district__img", "(max-width: 900px) 100vw, 40vw")}</div>
     <div class="district__intro">
       <p class="eyebrow"><span class="eyebrow__num">0{i}</span> {len(d["patrols"])} סיירות</p>
-      <h2 id="h-{d["id"]}" class="district__title">{e(d["name"])}</h2>
+      <div class="district__titlerow">{district_emblem(d)}<h2 id="h-{d["id"]}" class="district__title">{e(d["name"])}</h2></div>
       <dl class="district__facts">
         <div><dt>בפיקודו של</dt><dd>{e(d["commander"])}</dd></div>
         <div><dt>מוקד המחוז</dt><dd>{tel_link(d["hotline"])}</dd></div>
@@ -166,10 +198,15 @@ def leaders():
     out = []
     for d in DATA["districts"]:
         initials = "".join(w[0] for w in d["commander"].split()[:2])
+        if (OUT / "assets" / "people" / f'leader-{d["id"]}.webp').exists():
+            photo = (f'<img class="leader__photo" src="assets/people/leader-{d["id"]}.webp" width="96" height="96" '
+                     f'alt="{e(d["commander"])}" loading="lazy" decoding="async">')
+        else:
+            photo = f'<div class="leader__mono" aria-hidden="true">{e(initials)}</div>'
         note = f'<p class="leader__note">{e(d["commander_note"])}</p>' if d["commander_note"] else ""
         out.append(f'''
 <li class="leader leader--{d["tone"]}">
-  <div class="leader__mono" aria-hidden="true">{e(initials)}</div>
+  {photo}
   <h3 class="leader__name">{e(d["commander"])}</h3>
   <p class="leader__role">{e(d["commander_role"])}</p>
   <p class="leader__areas"><span class="k">בפיקודו ערים וישובים:</span> {e(d["areas"])}.</p>
@@ -179,37 +216,88 @@ def leaders():
     return '<ul class="leaders" role="list">' + "".join(out) + "</ul>"
 
 
-def quote_card(t, big=False):
+PEOPLE_DIR = OUT / "assets" / "people"
+
+
+def avatar(t):
+    if t["video"] and (PEOPLE_DIR / f'{t["video"]}.webp').exists():
+        return (f'<img class="quote__avatar" src="assets/people/{t["video"]}.webp" width="56" height="56" '
+                f'alt="" loading="lazy" decoding="async">')
+    words = [w for w in t["name"].replace('"', "").split() if w not in ("הרב", "הגאון", "רבי", "שליט״א", "שליט\"א")]
+    letters = "".join(w[0] for w in words[:2])
+    return f'<span class="quote__avatar quote__avatar--mono" aria-hidden="true">{e(letters)}</span>'
+
+
+def ordered_testimonials():
+    rabbis = [t for t in DATA["testimonials"] if t["group"] == "rabbis"]
+    public = [t for t in DATA["testimonials"] if t["group"] != "rabbis"]
+    out = []
+    while rabbis or public:
+        if rabbis:
+            out.append(rabbis.pop(0))
+        if public:
+            out.append(public.pop(0))
+    return out
+
+
+def quote_card(t):
     role = f'<span class="quote__role">{e(t["role"])}</span>' if t["role"] else ""
     vid = (ext(f'https://www.youtube.com/watch?v={t["video"]}',
                f'{icon("play")} לצפייה בדברים<span class="sr-only"> של {e(t["name"])} ביוטיוב</span>',
                "quote__video") if t["video"] else "")
-    cls = "quote quote--big" if big else "quote"
-    return (f'<li class="{cls}" data-group="{t["group"]}"><figure><blockquote><p>{e(t["quote"])}</p></blockquote>'
-            f'<figcaption><span class="quote__name">{e(t["name"])}</span>{role}</figcaption></figure>{vid}</li>')
+    return (f'<li class="quote" data-group="{t["group"]}"><figure><blockquote><p>{e(t["quote"])}</p></blockquote>'
+            f'<figcaption>{avatar(t)}<span class="quote__who"><span class="quote__name">{e(t["name"])}</span>{role}</span>'
+            f'</figcaption></figure>{vid}</li>')
 
 
-def testimonials_all():
-    return '<ul class="quotes" role="list" id="quotes">' + "".join(quote_card(t) for t in DATA["testimonials"]) + "</ul>"
-
-
-def testimonials_featured():
-    fs = [t for t in DATA["testimonials"] if t["featured"]][:6]
+def testimonials_rail():
+    ts = ordered_testimonials()
     return ('<div class="rail" data-rail>'
-            '<ul class="quotes quotes--rail" role="list" tabindex="0" aria-label="המלצות נבחרות - ניתן לגלול הצידה">'
-            + "".join(quote_card(t) for t in fs) + "</ul>"
+            '<ul class="quotes quotes--rail" id="quotes" role="list" tabindex="0" aria-label="המלצות - ניתן לגלול הצידה">'
+            + "".join(quote_card(t) for t in ts) + "</ul>"
             '<div class="rail__ctrl">'
             f'<button type="button" class="rail__btn" data-dir="prev" aria-label="ההמלצה הקודמת">{icon("arrow", "ico rail__ico--prev")}</button>'
             '<div class="rail__track" aria-hidden="true"><span class="rail__fill"></span></div>'
-            f'<p class="rail__count" aria-live="polite"><b class="rail__cur">1</b> / {len(fs)}</p>'
+            f'<p class="rail__count" aria-live="polite"><b class="rail__cur">1</b> / <span class="rail__total">{len(ts)}</span></p>'
             f'<button type="button" class="rail__btn" data-dir="next" aria-label="ההמלצה הבאה">{icon("arrow")}</button>'
             '</div></div>')
 
 
+THANKS = [
+    ("עיצוב ובניית האתר", "ArielYosupov-WebDesign", "https://arielyosupov-webdesign.com", "האתר עוצב ונבנה מחדש על ידי ArielYosupov-WebDesign."),
+    ("תודות", "SearchAOA", "https://www.searchaoa.com/", "תודה לצוותי SearchAOA."),
+    ("תודות", "גרפיקה י.ז", "", "תודה לגרפיקה י.ז."),
+    ("בתמיכת", "הרבנות הראשית לישראל", "https://www.gov.il/he/departments/chief_rabbinate_of_israel/govil-landing-page", "בתמיכת הרבנות הראשית."),
+    ("בתמיכת", "שרים בכנסת ישראל", "https://main.knesset.gov.il/pages/default.aspx", "בתמיכת שרים בכנסת ישראל."),
+    ("בשיתוף", "BANO - יזמות ופרסום", "https://chat.whatsapp.com/JdA5tZc00FQ3LCMmBomgCL", "בשיתוף חברת BANO - יזמות ופרסום."),
+]
+
+
+def thanks():
+    out = []
+    for i, (k, name, url, note) in enumerate(THANKS, 1):
+        link = ext(url, f'לאתר{icon("arrow")}', "thanks__link", f' aria-label="{e(name)} - מעבר לאתר"') if url else ""
+        out.append(f'<li class="thanks__item"><span class="thanks__n" aria-hidden="true">{i:02d}</span>'
+                   f'<span class="thanks__k">{e(k)}</span><h3 class="thanks__name">{e(name)}</h3>'
+                   f'<p class="thanks__note">{e(note)}</p>{link}</li>')
+    return '<ul class="thanks" role="list">' + "".join(out) + "</ul>"
+
+
 def ticker():
-    cities = [p["city"] for d in DATA["districts"] for p in d["patrols"]]
-    row = "".join(f'<li>{icon("star", "ico ticker__star")}סיירת {e(c)}</li>' for c in cities)
-    return (f'<div class="ticker" aria-hidden="true"><ul class="ticker__track">{row}{row}</ul></div>')
+    items = [(p["city"], p["group"]) for d in DATA["districts"] for p in d["patrols"] if p["group"]]
+
+    def row(hidden):
+        extra = ' tabindex="-1"' if hidden else ""
+        return "".join(
+            f'<li><a href="{e(g)}" target="_blank" rel="noopener noreferrer"{extra}>'
+            f'{icon("star", "ico ticker__star")}סיירת {e(c)}'
+            + ("" if hidden else '<span class="sr-only"> - הצטרפות לקבוצת הוואטסאפ (נפתח בחלון חדש)</span>')
+            + "</a></li>" for c, g in items)
+
+    return ('<nav class="ticker" aria-label="קבוצות הוואטסאפ של הסיירות"><div class="ticker__move">'
+            f'<ul class="ticker__track" role="list">{row(False)}</ul>'
+            f'<ul class="ticker__track" role="list" aria-hidden="true">{row(True)}</ul>'
+            '</div></nav>')
 
 
 def video_facade(vid, title):
@@ -244,8 +332,8 @@ COMPONENTS = {
     "patrols_full": patrols_full,
     "district_cards": district_cards,
     "leaders": leaders,
-    "testimonials_all": testimonials_all,
-    "testimonials_featured": testimonials_featured,
+    "testimonials_rail": testimonials_rail,
+    "thanks": thanks,
     "ticker": ticker,
     "main_video": lambda: video_facade(S["main_video"], "מגן דוד לבן - וידאו עלינו"),
     "social": social_links,
@@ -291,7 +379,7 @@ def org_jsonld():
         "logo": S["url"] + "/icon-512.png",
         "image": S["url"] + "/og-image.jpg",
         "email": S["email"],
-        "address": {"@type": "PostalAddress", "addressLocality": "אבן שמואל", "addressCountry": "IL"},
+        "address": {"@type": "PostalAddress", "streetAddress": "הזמיר 2", "addressLocality": "אבן שמואל", "addressCountry": "IL"},
         "areaServed": {"@type": "Country", "name": "ישראל"},
         "contactPoint": [
             {"@type": "ContactPoint", "telephone": S["volunteer_line"]["tel"], "contactType": "volunteer", "name": S["volunteer_line"]["label"], "availableLanguage": "he"},
@@ -388,5 +476,38 @@ def build():
     print("built sitemap.xml")
 
 
+# הפניות מכתובות האתר הישן (למניעת אובדן דירוג בגוגל אחרי מעבר הדומיין)
+OLD_URLS = {
+    "אודות-1": "about.html",
+    "על-האתר": "about.html",
+    "עוד-עלינו": "about.html",
+    "הסיירות-שלנו": "patrols.html",
+    "services": "services.html",
+    "גלריה": "media.html",
+    "וידאו-עלינו": "media.html",
+    "דברו-במספרים": "index.html",
+    "הנהלת-המערך-הארצי": "leadership.html",
+    "המלצות": "endorsements.html",
+    "תרומה": "donate.html",
+    "privacy": "privacy.html",
+}
+
+
+def build_redirects():
+    for old, new in OLD_URLS.items():
+        target = S["url"] + "/" + ("" if new == "index.html" else new)
+        d = OUT / old
+        d.mkdir(exist_ok=True)
+        (d / "index.html").write_text(
+            '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8">'
+            f'<title>{e(S["name"])}</title><link rel="canonical" href="{target}">'
+            '<meta name="robots" content="noindex,follow">'
+            f'<meta http-equiv="refresh" content="0; url=../{new}"></head>'
+            f'<body><p><a href="../{new}">המשך לעמוד החדש</a></p></body></html>\n',
+            encoding="utf-8")
+    print("built", len(OLD_URLS), "redirects")
+
+
 if __name__ == "__main__":
     build()
+    build_redirects()

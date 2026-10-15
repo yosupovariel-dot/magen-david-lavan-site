@@ -57,15 +57,16 @@
     window.matchMedia("(min-width: 1081px)").addEventListener("change", function (m) { if (m.matches) closeMenu(false); });
   }
 
-  /* ---------- קרוסלת המלצות (נייד) ---------- */
+  /* ---------- קרוסלת המלצות ---------- */
   document.querySelectorAll("[data-rail]").forEach(function (rail) {
     var list = rail.querySelector(".quotes--rail");
-    var items = list.querySelectorAll(".quote");
     var prev = rail.querySelector('[data-dir="prev"]');
     var next = rail.querySelector('[data-dir="next"]');
     var fill = rail.querySelector(".rail__fill");
     var cur = rail.querySelector(".rail__cur");
-    function index() {
+    var tot = rail.querySelector(".rail__total");
+    function visible() { return Array.prototype.filter.call(list.querySelectorAll(".quote"), function (q) { return !q.hidden; }); }
+    function index(items) {
       var best = 0, bestD = Infinity, lr = list.getBoundingClientRect();
       items.forEach(function (it, i) {
         var d = Math.abs(it.getBoundingClientRect().right - lr.right);
@@ -74,17 +75,23 @@
       return best;
     }
     function update() {
+      var items = visible();
       var max = list.scrollWidth - list.clientWidth;
       var pos = Math.abs(list.scrollLeft);
-      var i = index();
-      fill.style.transform = "scaleX(" + (i + 1) / items.length + ")";
-      cur.textContent = String(i + 1);
+      var i = index(items);
+      if (max > 4 && pos > max - 4) i = items.length - 1;
+      fill.style.transform = "scaleX(" + (items.length ? (i + 1) / items.length : 1) + ")";
+      cur.textContent = String(items.length ? i + 1 : 0);
+      if (tot) tot.textContent = String(items.length);
       prev.disabled = pos < 4;
-      next.disabled = pos > max - 4;
+      next.disabled = max <= 4 || pos > max - 4;
     }
     function go(dir) {
-      var i = Math.max(0, Math.min(items.length - 1, index() + dir));
-      items[i].scrollIntoView({ behavior: motionOff() ? "auto" : "smooth", block: "nearest", inline: "start" });
+      var items = visible(); if (!items.length) return;
+      var i = Math.max(0, Math.min(items.length - 1, index(items) + dir));
+      var target = items[i];
+      var lr = list.getBoundingClientRect(), tr = target.getBoundingClientRect();
+      list.scrollBy({ left: tr.right - lr.right, behavior: motionOff() ? "auto" : "smooth" });
     }
     prev.addEventListener("click", function () { go(-1); });
     next.addEventListener("click", function () { go(1); });
@@ -94,6 +101,7 @@
       raf = window.requestAnimationFrame(function () { raf = 0; update(); });
     }, { passive: true });
     window.addEventListener("resize", update);
+    rail.addEventListener("rail:refresh", function () { list.scrollLeft = 0; update(); });
     update();
   });
 
@@ -115,7 +123,7 @@
   }
 
   /* ---------- חשיפה בגלילה ---------- */
-  var revealSel = ".sec-head, .intro__grid > *, .arena, .stat, .chain__step, .dcard, .bento__item, .quote, .video__grid > *, .pillar, .leader, .track, .pay__item, .line, .dline, .album, .district__head, .strip figure";
+  var revealSel = ".sec-head, .intro__grid > *, .arena, .stat, .chain__step, .dcard, .bento__item, .video__grid > *, .pillar, .leader, .track, .pay__item, .line, .dline, .album, .district__head, .strip figure";
   var revealEls = Array.prototype.filter.call(document.querySelectorAll(revealSel), function (el) {
     return !el.closest(".quotes--rail");
   });
@@ -212,6 +220,8 @@
           if (hit) { n++; q.classList.add("is-in"); }
         });
         if (fstatus) fstatus.textContent = "מוצגות " + n + " המלצות";
+        var r = document.querySelector("[data-rail]");
+        if (r) r.dispatchEvent(new Event("rail:refresh"));
       });
     });
   }

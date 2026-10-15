@@ -15,15 +15,15 @@
   </div>
 </section>
 
-<section class="section" aria-label="רשימת ההמלצות">
+<section class="section section--ink" aria-label="רשימת ההמלצות">
   <div class="wrap">
     <div class="filters" role="group" aria-label="סינון המלצות">
-      <button type="button" class="chip" data-filter="all" aria-pressed="true">הכל</button>
-      <button type="button" class="chip" data-filter="rabbis" aria-pressed="false">רבנים</button>
-      <button type="button" class="chip" data-filter="public" aria-pressed="false">נבחרי ציבור</button>
+      <button type="button" class="chip chip--dark" data-filter="all" aria-pressed="true">הכל</button>
+      <button type="button" class="chip chip--dark" data-filter="rabbis" aria-pressed="false">רבנים</button>
+      <button type="button" class="chip chip--dark" data-filter="public" aria-pressed="false">נבחרי ציבור</button>
     </div>
     <p class="sr-only" role="status" aria-live="polite" id="filter-status"></p>
-    {{testimonials_all}}
-    <p class="note">התארים והתפקידים מובאים כפי שהופיעו בעת אמירת הדברים.</p>
+    {{testimonials_rail}}
+    <p class="note note--light">התארים והתפקידים מובאים כפי שהופיעו בעת אמירת הדברים.</p>
   </div>
 </section>

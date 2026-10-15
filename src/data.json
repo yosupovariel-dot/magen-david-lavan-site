@@ -5,7 +5,7 @@
     "slogan": "הצלה מעבר לרפואה",
     "url": "https://www.magendavidlavan.com",
     "email": "maagendavidlavan@gmail.com",
-    "address": "אבן שמואל, ישראל",
+    "address": "הזמיר 2, אבן שמואל, ישראל",
     "volunteer_line": { "label": "מוקד התנדבות ארצי", "display": "050-4126-351", "tel": "+972504126351" },
     "emergency_line": { "label": "מוקד חירום ארצי", "display": "053-7994-199", "tel": "+972537994199" },
     "social": {
@@ -25,7 +25,7 @@
       "assistance": "https://forms.gle/YgsfcU2v9Gx6Nigt7"
     },
     "stats": [
-      { "value": 2500, "label": "מתנדבים" },
+      { "value": 2600, "label": "מתנדבים" },
       { "value": 93700, "label": "אנשים שעזרנו להם" },
       { "value": 28, "label": "חברות שפנו אלינו" }
     ],
