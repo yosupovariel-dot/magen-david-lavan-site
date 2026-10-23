@@ -1056,7 +1056,7 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
 .quotes--rail:focus-visible { outline-offset: -3px; }
 .quotes--rail .quote { flex: 0 0 calc((100% - 32px) / 3); scroll-snap-align: start; }
 @media (min-width: 1081px) {
-  .quotes--rail { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-template-rows: repeat(2, auto); grid-auto-columns: calc((100% - 32px) / 3); }
+  .quotes--rail { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-template-rows: repeat(2, 1fr); grid-auto-columns: calc((100% - 32px) / 3); }
 }
 .rail__ctrl { display: flex; }
 @media (max-width: 1080px) { .quotes--rail .quote { flex-basis: calc((100% - 16px) / 2); } }
@@ -1068,7 +1068,12 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
 .quote figcaption { flex-direction: row; align-items: center; gap: 16px; }
 .quotes--rail .quote { justify-content: flex-start; gap: 14px; padding: 56px 26px 22px; }
 .quotes--rail .quote blockquote p { margin-bottom: 1rem; }
-.quotes--rail .quote__video { margin-top: auto; }
+.quotes--rail { align-items: stretch; }
+.quotes--rail .quote figure { flex: 1; display: flex; flex-direction: column; margin: 0; }
+.quotes--rail .quote blockquote { flex: 1; }
+.quotes--rail .quote figcaption { min-height: 108px; }
+@media (max-width: 720px) { .quotes--rail .quote figcaption { min-height: 132px; } }
+.quotes--rail .quote__video { margin-top: 4px; }
 .quote__who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .quote__avatar {
   width: 76px; height: 76px; flex: none; border-radius: 50%; object-fit: cover;
