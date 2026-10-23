@@ -13,7 +13,7 @@
       "youtube": "https://www.youtube.com/channel/UCTONx1UmEGpipkcWXj9Cz1Q",
       "instagram": "https://www.instagram.com/invites/contact/?i=10jhyj2de4m3o&utm_content=tg1hv2x",
       "status": "https://wa.me/972504552025",
-      "gallery": "https://photos.google.com/share/AF1QipPSJKAMsTl7sIqlQL2NetR6oe8NOYeQ6pbgJYP3Yi2Jy3bnaKgKtrIScnRgm3jViw/photo/AF1QipOFMo7EfXioeAB9ItJEJeRZumwDUM3E7zT3mjlW?key=OUpSaUxQU29oVTZmUTVLbU03aEtiekEwOXlkY0Z3"
+      "gallery": "https://photos.google.com/share/AF1QipPSJKAMsTl7sIqlQL2NetR6oe8NOYeQ6pbgJYP3Yi2Jy3bnaKgKtrIScnRgm3jViw?key=OUpSaUxQU29oVTZmUTVLbU03aEtiekEwOXlkY0Z3"
     },
     "donate": {
       "paybox": "https://payboxapp.page.link/h2UYKxHXzxFGvE648",
@@ -135,7 +135,7 @@
     { "name": "הרב אורי שרקי", "role": "רב תנועת הנוער עזרא", "group": "rabbis", "quote": "מגן דוד לבן נותן כוח לכוחות הביטחון! נותן כוח לעם ישראל! זה ארגון חשוב מאוד!", "video": "vCOSWGLuEsk", "featured": false },
     { "name": "שלמה קרעי", "role": "שר התקשורת של ישראל", "group": "public", "quote": "מגן דוד לבן, עמותה שבאה לעשות חסד ולסייע.. קורא לכל מי שמכיר ושומע לבוא להתנדב ולקחת חלק!", "video": "02cEkQtjHZg", "featured": false },
     { "name": "הגאון הרב שמואל אליהו", "role": "הרב הראשי לצפת וחבר מועצת הרבנות הראשית", "group": "rabbis", "quote": "ארגון מגן דוד לבן שלקח על עצמו לעשות חסד! להרבות אור, להרבות ברכה! יחוזקו כל מי שעוזר, כל מי שתומך!", "video": "BzToGeCUpak", "featured": true },
-    { "name": "הרב שלום ארוש", "role": "גדול רבני חסידות ברסלב", "group": "rabbis", "quote": "למייסד המערך: ה' יברך אותך שיהיה לך הצלחה גדולה וסייעתא דשמייה גדולה!", "video": "", "featured": false },
+    { "name": "הרב שלום ארוש", "role": "גדול רבני חסידות ברסלב", "group": "rabbis", "quote": "למייסד המערך: ה' יברך אותך שיהיה לך הצלחה גדולה וסייעתא דשמייה גדולה!", "video": "", "photo": "arush", "featured": false },
     { "name": "הרב דוד לאו שליט\"א", "role": "הרב הראשי לישראל, נשיא בית הדין הרבני הגדול", "group": "rabbis", "quote": "לוחמים רבים נלחמים בחירוף נפש, בגבורה, באומץ.. ומוסרים חייהם למען זולתם!", "video": "Ob1yeTKewH0", "featured": true }
   ]
 }

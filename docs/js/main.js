@@ -65,33 +65,27 @@
     var fill = rail.querySelector(".rail__fill");
     var cur = rail.querySelector(".rail__cur");
     var tot = rail.querySelector(".rail__total");
-    function visible() { return Array.prototype.filter.call(list.querySelectorAll(".quote"), function (q) { return !q.hidden; }); }
-    function index(items) {
-      var best = 0, bestD = Infinity, lr = list.getBoundingClientRect();
-      items.forEach(function (it, i) {
-        var d = Math.abs(it.getBoundingClientRect().right - lr.right);
-        if (d < bestD) { bestD = d; best = i; }
-      });
-      return best;
+    function step() {
+      var it = list.querySelector(".quote:not([hidden])");
+      if (!it) return list.clientWidth || 1;
+      var gap = parseFloat(getComputedStyle(list).columnGap) || 0;
+      var unit = it.offsetWidth + gap;
+      return Math.max(1, Math.round((list.clientWidth + gap) / unit)) * unit;
     }
+    function pages() { return Math.max(1, Math.ceil((list.scrollWidth - list.clientWidth) / step() - 0.05) + 1); }
+    function page() { return Math.min(pages(), Math.round(Math.abs(list.scrollLeft) / step()) + 1); }
     function update() {
-      var items = visible();
       var max = list.scrollWidth - list.clientWidth;
       var pos = Math.abs(list.scrollLeft);
-      var i = index(items);
-      if (max > 4 && pos > max - 4) i = items.length - 1;
-      fill.style.transform = "scaleX(" + (items.length ? (i + 1) / items.length : 1) + ")";
-      cur.textContent = String(items.length ? i + 1 : 0);
-      if (tot) tot.textContent = String(items.length);
+      var n = pages(), i = (max > 4 && pos > max - 4) ? n : page();
+      fill.style.transform = "scaleX(" + i / n + ")";
+      cur.textContent = String(i);
+      if (tot) tot.textContent = String(n);
       prev.disabled = pos < 4;
       next.disabled = max <= 4 || pos > max - 4;
     }
     function go(dir) {
-      var items = visible(); if (!items.length) return;
-      var i = Math.max(0, Math.min(items.length - 1, index(items) + dir));
-      var target = items[i];
-      var lr = list.getBoundingClientRect(), tr = target.getBoundingClientRect();
-      list.scrollBy({ left: tr.right - lr.right, behavior: motionOff() ? "auto" : "smooth" });
+      list.scrollBy({ left: -dir * step(), behavior: motionOff() ? "auto" : "smooth" });
     }
     prev.addEventListener("click", function () { go(-1); });
     next.addEventListener("click", function () { go(1); });

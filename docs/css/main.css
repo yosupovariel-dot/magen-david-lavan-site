@@ -746,7 +746,7 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
 .rail__btn:disabled { opacity: .35; cursor: default; background: transparent; color: #fff; }
 .rail__track { flex: 1; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, .15); overflow: hidden; }
 .rail__fill { display: block; height: 100%; width: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--mint-2), var(--aqua-2)); transform-origin: right; transform: scaleX(.16); transition: transform .25s var(--ease); }
-.rail__count { margin: 0; font-size: .9rem; color: #b5c4e2; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rail__count { direction: ltr; unicode-bidi: isolate; margin: 0; font-size: .9rem; color: #b5c4e2; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .rail__count b { color: #fff; font-family: var(--f-num); font-size: 1.3rem; }
 @media (max-width: 720px) { .rail__ctrl { display: flex; } }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
@@ -1055,6 +1055,9 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
 .quotes--rail::-webkit-scrollbar { display: none; }
 .quotes--rail:focus-visible { outline-offset: -3px; }
 .quotes--rail .quote { flex: 0 0 calc((100% - 32px) / 3); scroll-snap-align: start; }
+@media (min-width: 1081px) {
+  .quotes--rail { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-template-rows: repeat(2, auto); grid-auto-columns: calc((100% - 32px) / 3); }
+}
 .rail__ctrl { display: flex; }
 @media (max-width: 1080px) { .quotes--rail .quote { flex-basis: calc((100% - 16px) / 2); } }
 @media (max-width: 720px) {
@@ -1062,12 +1065,16 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
   .quotes--rail .quote { flex-basis: 86%; }
   .rail__ctrl { padding-inline-end: 62px; }
 }
-.quote figcaption { flex-direction: row; align-items: center; gap: 14px; }
+.quote figcaption { flex-direction: row; align-items: center; gap: 16px; }
+.quotes--rail .quote { justify-content: flex-start; gap: 14px; padding: 56px 26px 22px; }
+.quotes--rail .quote blockquote p { margin-bottom: 1rem; }
+.quotes--rail .quote__video { margin-top: auto; }
 .quote__who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .quote__avatar {
-  width: 56px; height: 56px; flex: none; border-radius: 50%; object-fit: cover;
+  width: 76px; height: 76px; flex: none; border-radius: 50%; object-fit: cover;
   box-shadow: 0 0 0 3px rgba(159, 224, 238, .55), 0 8px 18px -8px rgba(0, 0, 0, .6);
 }
+@media (max-width: 720px) { .quote__avatar { width: 68px; height: 68px; } }
 .quote__avatar--mono {
   display: inline-grid; place-items: center; background: linear-gradient(140deg, var(--sky-2), var(--mint-2));
   color: var(--ink); font-family: var(--f-display); font-weight: 800; font-size: 1.25rem;
@@ -1103,6 +1110,11 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
   border-radius: var(--r-l); background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow-s);
 }
 .thanks__item:first-child { background: var(--ink); color: #fff; border-color: var(--ink); }
+.thanks__logo { display: flex; align-items: center; justify-content: flex-start; height: 72px; margin-bottom: 12px; }
+.thanks__logo img { max-height: 72px; max-width: 70%; width: auto; height: auto; object-fit: contain; }
+.thanks__item:first-child .thanks__logo img { max-height: 76px; }
+.thanks__logo--ico span, .thanks__logo--ico { color: var(--blue-deep); }
+.thanks__logo--ico .ico { width: 64px; height: 64px; padding: 16px; border-radius: 18px; background: var(--sky); }
 .thanks__n { font-family: var(--f-num); font-size: 1.5rem; color: var(--muted); line-height: 1; margin-bottom: 10px; }
 .thanks__k { font-size: .82rem; font-weight: 700; letter-spacing: .06em; color: var(--blue-deep); }
 .thanks__name { font-family: var(--f-display); font-size: 1.55rem; line-height: 1.15; }

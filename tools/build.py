@@ -224,8 +224,9 @@ PEOPLE_DIR = OUT / "assets" / "people"
 
 
 def avatar(t):
-    if t["video"] and (PEOPLE_DIR / f'{t["video"]}.webp').exists():
-        return (f'<img class="quote__avatar" src="assets/people/{t["video"]}.webp" width="56" height="56" '
+    key = t.get("photo") or t["video"]
+    if key and (PEOPLE_DIR / f'{key}.webp').exists():
+        return (f'<img class="quote__avatar" src="assets/people/{key}.webp" width="76" height="76" '
                 f'alt="" loading="lazy" decoding="async">')
     words = [w for w in t["name"].replace('"', "").split() if w not in ("הרב", "הגאון", "רבי", "שליט״א", "שליט\"א")]
     letters = "".join(w[0] for w in words[:2])
@@ -262,7 +263,7 @@ def testimonials_rail():
             '<div class="rail__ctrl">'
             f'<button type="button" class="rail__btn" data-dir="prev" aria-label="ההמלצה הקודמת">{icon("arrow", "ico rail__ico--prev")}</button>'
             '<div class="rail__track" aria-hidden="true"><span class="rail__fill"></span></div>'
-            f'<p class="rail__count" aria-live="polite"><b class="rail__cur">1</b> / <span class="rail__total">{len(ts)}</span></p>'
+            '<p class="rail__count" aria-live="polite"><b class="rail__cur">1</b> / <span class="rail__total">1</span></p>'
             f'<button type="button" class="rail__btn" data-dir="next" aria-label="ההמלצה הבאה">{icon("arrow")}</button>'
             '</div></div>')
 
@@ -298,20 +299,22 @@ def gallery():
 
 
 THANKS = [
-    ("עיצוב ובניית האתר", "ArielYosupov-WebDesign", "https://arielyosupov-webdesign.com", "האתר עוצב ונבנה מחדש על ידי ArielYosupov-WebDesign."),
-    ("תודות", "SearchAOA", "https://www.searchaoa.com/", "תודה לצוותי SearchAOA."),
-    ("תודות", "גרפיקה י.ז", "", "תודה לגרפיקה י.ז."),
-    ("בתמיכת", "הרבנות הראשית לישראל", "https://www.gov.il/he/departments/chief_rabbinate_of_israel/govil-landing-page", "בתמיכת הרבנות הראשית."),
-    ("בתמיכת", "שרים בכנסת ישראל", "https://main.knesset.gov.il/pages/default.aspx", "בתמיכת שרים בכנסת ישראל."),
-    ("בשיתוף", "BANO - יזמות ופרסום", "https://chat.whatsapp.com/JdA5tZc00FQ3LCMmBomgCL", "בשיתוף חברת BANO - יזמות ופרסום."),
+    ("עיצוב ובניית האתר", "ArielYosupov-WebDesign", "https://arielyosupov-webdesign.com", "האתר עוצב ונבנה מחדש על ידי ArielYosupov-WebDesign.", "arielyosupov.svg"),
+    ("תודות", "SearchAOA", "https://www.searchaoa.com/", "תודה לצוותי SearchAOA.", "searchaoa.webp"),
+    ("תודות", "גרפיקה י.ז", "", "תודה לגרפיקה י.ז.", ""),
+    ("בתמיכת", "הרבנות הראשית לישראל", "https://www.gov.il/he/departments/chief_rabbinate_of_israel/govil-landing-page", "בתמיכת הרבנות הראשית.", "rabbinate.webp"),
+    ("בתמיכת", "שרים בכנסת ישראל", "https://main.knesset.gov.il/pages/default.aspx", "בתמיכת שרים בכנסת ישראל.", ""),
+    ("בשיתוף", "BANO - יזמות ופרסום", "https://chat.whatsapp.com/JdA5tZc00FQ3LCMmBomgCL", "בשיתוף חברת BANO - יזמות ופרסום.", "bano.webp"),
 ]
 
 
 def thanks():
     out = []
-    for i, (k, name, url, note) in enumerate(THANKS, 1):
+    for i, (k, name, url, note, logo) in enumerate(THANKS, 1):
         link = ext(url, f'לאתר{icon("arrow")}', "thanks__link", f' aria-label="{e(name)} - מעבר לאתר"') if url else ""
-        out.append(f'<li class="thanks__item"><span class="thanks__n" aria-hidden="true">{i:02d}</span>'
+        lg = (f'<span class="thanks__logo"><img src="assets/partners/{logo}" alt="" loading="lazy" decoding="async"></span>'
+              if logo else f'<span class="thanks__logo thanks__logo--ico" aria-hidden="true">{icon("bank" if "כנסת" in name else "camera")}</span>')
+        out.append(f'<li class="thanks__item">{lg}<span class="thanks__n" aria-hidden="true">{i:02d}</span>'
                    f'<span class="thanks__k">{e(k)}</span><h3 class="thanks__name">{e(name)}</h3>'
                    f'<p class="thanks__note">{e(note)}</p>{link}</li>')
     return '<ul class="thanks" role="list">' + "".join(out) + "</ul>"
