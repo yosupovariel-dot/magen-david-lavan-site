@@ -28,6 +28,7 @@ NAV = [
     ("leadership.html", "הנהלה"),
     ("endorsements.html", "המלצות"),
     ("media.html", "מדיה"),
+    ("thanks.html", "תודות"),
     ("contact.html", "צור קשר"),
 ]
 
