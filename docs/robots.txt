@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: https://www.magendavidlavan.com/sitemap.xml
+Sitemap: https://magendavidlavan.com/sitemap.xml

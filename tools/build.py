@@ -472,7 +472,8 @@ def build():
         body = raw[m.end():]
         slug = p.name
         canonical = S["url"] + "/" + ("" if slug == "index.html" else slug)
-        lds = [org_jsonld()] if slug == "index.html" else []
+        lds = [org_jsonld(), {"@context": "https://schema.org", "@type": "WebSite", "name": S["name"],
+                              "alternateName": S["name_en"], "url": S["url"] + "/", "inLanguage": "he"}] if slug == "index.html" else []
         bc = breadcrumb(slug, meta.get("crumb", meta["title"]))
         if bc:
             lds.append(bc)
