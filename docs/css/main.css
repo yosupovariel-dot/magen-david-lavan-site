@@ -228,8 +228,7 @@ dl, dd { margin: 0; }
   padding-inline: 12px 10px;
   border-radius: 999px;
   border-color: rgba(255, 255, 255, .85);
-  background-color: rgba(255, 255, 255, .84);
-  -webkit-backdrop-filter: saturate(170%) blur(16px); backdrop-filter: saturate(170%) blur(16px);
+  background-color: rgba(255, 255, 255, .96);
   box-shadow: 0 18px 40px -18px rgba(11, 23, 48, .35), 0 2px 8px -4px rgba(11, 23, 48, .12);
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); flex: none; min-width: 0; }
@@ -397,8 +396,7 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
 .proof {
   display: grid; grid-template-columns: repeat(3, 1fr);
   margin: 2.2rem 0 0; max-width: 520px;
-  background: rgba(255, 255, 255, .72);
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, .9);
   border: 1px solid rgba(255, 255, 255, .9); border-radius: var(--r-l);
   box-shadow: 0 1px 2px rgba(11, 23, 48, .05), 0 16px 34px -20px rgba(11, 23, 48, .3);
   overflow: hidden;
@@ -448,8 +446,7 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
   border-radius: 50%; overflow: hidden; border: 6px solid var(--paper); box-shadow: var(--shadow);
 }
 .hero__card {
-  position: absolute; background: rgba(255, 255, 255, .92);
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  position: absolute; background: #fff;
   border: 1px solid rgba(255, 255, 255, .8); border-radius: var(--r); box-shadow: var(--shadow);
 }
 .hero__card--sos { right: -4%; bottom: 0; padding: 14px 20px; display: flex; flex-direction: column; gap: 2px; }
@@ -549,7 +546,6 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
   border-radius: var(--r-l);
   background: rgba(255, 255, 255, .055);
   border: 1px solid rgba(255, 255, 255, .1);
-  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
 }
 .impact__tile--feat {
   grid-area: feat; justify-content: flex-end; min-height: 320px;
@@ -688,7 +684,7 @@ html.no-scroll, html.no-scroll body { overflow: hidden; }
 .bento__item--a .bento__body p { color: #dbe5f8; }
 .bento__ico { display: inline-grid; place-items: center; width: 54px; height: 54px; border-radius: 16px; background: var(--white); color: var(--blue-deep); margin-bottom: auto; }
 .bento__ico .ico { width: 28px; height: 28px; }
-.bento__item--a .bento__ico { background: rgba(255, 255, 255, .14); color: #fff; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.bento__item--a .bento__ico { background: rgba(255, 255, 255, .14); color: #fff; }
 @media (max-width: 900px) { .bento { grid-template-columns: 1fr; } .bento__item--a { grid-row: auto; min-height: 440px; } }
 
 /* Quotes */
