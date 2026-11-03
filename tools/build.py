@@ -14,6 +14,7 @@ SRC = ROOT / "src"
 OUT = ROOT / "docs"
 DATA = json.loads((SRC / "data.json").read_text(encoding="utf-8"))
 _EMB = json.loads((SRC / "emblems.json").read_text(encoding="utf-8")) if (SRC / "emblems.json").exists() else {}
+IMAGES = json.loads((SRC / "images.json").read_text(encoding="utf-8")) if (SRC / "images.json").exists() else {}
 EMBLEMS = _EMB.get("map", {})
 DISTRICT_LOGOS = _EMB.get("districts", {})
 S = DATA["site"]
@@ -52,11 +53,25 @@ def tel_link(display, cls="tel"):
     return f'<a class="{cls}" href="tel:{intl}" dir="ltr">{e(display)}</a>'
 
 
-def picture(name, alt, cls="", sizes="100vw", eager=False, w=1600, h=1067):
-    loading = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+def picture(name, alt, cls="", sizes="100vw", eager=False):
+    """eager=True: תמונה ראשית מעל הקפל; eager="low": נטענת מיד אך בלי עדיפות גבוהה."""
+    if eager is True:
+        loading = 'fetchpriority="high" decoding="async"'
+    elif eager:
+        loading = 'decoding="async"'
+    else:
+        loading = 'loading="lazy" decoding="async"'
+    info = IMAGES.get(name)
+    if info:
+        v = sorted(info["variants"].items(), key=lambda kv: kv[1][0])
+        srcset = ", ".join(f"assets/img/{name}-{suf}.webp {wh[0]}w" for suf, wh in v)
+        w, h = info["w"], info["h"]
+        cls = (cls + " " if cls else "") + f"lqip-{name}"
+    else:
+        srcset = f"assets/img/{name}-800.webp 800w, assets/img/{name}-1600.webp 1600w"
+        w, h = 1600, 1067
     c = f' class="{cls}"' if cls else ""
-    return (f'<img{c} src="assets/img/{name}-1600.webp" '
-            f'srcset="assets/img/{name}-800.webp 800w, assets/img/{name}-1600.webp 1600w" '
+    return (f'<img{c} src="assets/img/{name}-1600.webp" srcset="{srcset}" '
             f'sizes="{sizes}" width="{w}" height="{h}" alt="{e(alt)}" {loading}>')
 
 
@@ -387,10 +402,10 @@ def fill(text):
         if key.startswith("icon:"):
             return icon(key[5:])
         if key.startswith("img:"):
-            # {{img:name|alt|class|sizes|eager}}
+            # {{img:name|alt|class|sizes|eager}}  (eager = עדיפות גבוהה, soon = מיידי בלי עדיפות)
             parts = (key[4:].split("|") + ["", "", "", ""])[:5]
             name, alt, cls, sizes, flag = parts
-            return picture(name, alt, cls, sizes or "100vw", eager=flag == "eager")
+            return picture(name, alt, cls, sizes or "100vw", eager=True if flag == "eager" else ("low" if flag == "soon" else False))
         if key.startswith("ext:"):
             # {{ext:URL|label|class}}
             url, label, *rest = key[4:].split("|")
