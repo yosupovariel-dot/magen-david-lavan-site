@@ -28,6 +28,7 @@ docs/              ← האתר המוכן להעלאה (זה מה שמפרסמ�
 
 ## אחסון
 
+- **תמונות חדשות:** אחרי הוספה/החלפה של תמונה ב-`docs/assets/img` מריצים `python tools/images.py` (דורש Pillow) ואז `python tools/build.py`.
 - **Cloudflare Pages / Netlify (מומלץ):** תיקיית פרסום = `docs`. קובץ `docs/_headers` מפעיל את כל כותרות האבטחה (CSP, HSTS, X-Frame-Options ועוד).
 - **GitHub Pages:** Settings → Pages → Branch `main`, תיקייה `/docs`. ב-GitHub Pages אין תמיכה בכותרות מותאמות, ולכן מדיניות ה-CSP מוגדרת גם בתגית meta בכל עמוד.
 

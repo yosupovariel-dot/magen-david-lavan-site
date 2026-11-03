@@ -209,6 +209,33 @@
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
     revealEls.forEach(function (el) { io.observe(el); });
 
+    /* גיבוי: גלילה מהירה / קפיצה לעוגן / צילום מסך מדלגים על אלמנטים בלי שה-IntersectionObserver
+       יירה עבורם - הם נשארו שקופים. כל מה שנמצא מעל תחתית המסך נחשף מיד. */
+    var pending = Array.prototype.slice.call(revealEls), ticking = false;
+    var sweep = function () {
+      ticking = false;
+      var limit = window.innerHeight;
+      pending = pending.filter(function (el) {
+        if (el.classList.contains("is-in")) return false;
+        if (el.getBoundingClientRect().top < limit) {
+          el.classList.add("is-in");
+          io.unobserve(el);
+          return false;
+        }
+        return true;
+      });
+      if (!pending.length) {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+      }
+    };
+    var onScroll = function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(sweep); }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("load", onScroll);
+
     var co = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
