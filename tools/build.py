@@ -6,7 +6,7 @@
 import json
 import re
 import html
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -19,7 +19,7 @@ EMBLEMS = _EMB.get("map", {})
 DISTRICT_LOGOS = _EMB.get("districts", {})
 S = DATA["site"]
 TODAY = date.today().isoformat()
-VERSION = TODAY.replace("-", "")
+VERSION = datetime.now().strftime("%Y%m%d%H%M")  # משתנה בכל בנייה - מכריח את הדפדפן לטעון CSS/JS חדשים
 
 NAV = [
     ("index.html", "ראשי"),
